@@ -63,6 +63,11 @@
                         then $inspire-thesaurus//skos:Concept
                         else ''"/>
 
+  <xsl:variable name="geoportail-wallon-thesaurus"
+                select="document(concat('file:///', replace($thesauriDir, '\\', '/'), '/external/thesauri/theme/Themes_geoportail_wallon.rdf'))"/>
+  <xsl:variable name="geoportail-wallon-theme"
+                select="$geoportail-wallon-thesaurus//*"/>
+
   <xsl:variable name="metadata"
                 select="/mdb:MD_Metadata"/>
 
@@ -248,6 +253,21 @@
 
     <xsl:for-each select="$metadata/mdb:identificationInfo/*">
 
+      <Field name="anylight" store="false" index="true">
+        <xsl:attribute name="string">
+          <xsl:for-each
+            select="mri:citation/*/cit:title/gco:CharacterString|
+                    mri:citation/*/cit:alternateTitle/gco:CharacterString|
+                    mri:abstract/gco:CharacterString|
+                    mri:credit/gco:CharacterString|
+                    .//cit:CI_Organisation/cit:name/gco:CharacterString|
+                    mri:descriptiveKeywords/*/mri:keyword/gco:CharacterString|
+                    mri:descriptiveKeywords/*/mri:keyword/gcx:Anchor">
+            <xsl:value-of select="concat(., ' ')"/>
+          </xsl:for-each>
+        </xsl:attribute>
+      </Field>
+
       <xsl:for-each select="mri:citation/*">
         <xsl:for-each select="cit:identifier/mcc:MD_Identifier/mcc:code">
           <xsl:copy-of select="gn-fn-iso19115-3.2018:index-field('identifier', ., $langId)"/>
@@ -341,6 +361,67 @@
           </xsl:for-each>
         </xsl:for-each>
       </xsl:for-each>
+
+
+
+      <!-- Metawal custom fields -->
+
+      <xsl:choose>
+        <xsl:when test="mri:resourceConstraints/*/mco:accessConstraints/*/@codeListValue = 'restricted'">
+          <Field name="accessConstraints" string="restricted" store="true" index="true"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <Field name="accessConstraints" string="public" store="true" index="true"/>
+        </xsl:otherwise>
+      </xsl:choose>
+
+      <xsl:for-each select="mri:descriptiveKeywords[
+                          contains(*/mri:thesaurusName/*/cit:title/gco:CharacterString,
+                                   'Mots-clés InfraSIG')]/*/mri:keyword">
+        <xsl:variable name="downloaddata" select="gco:CharacterString"/>
+        <xsl:if test="$downloaddata = 'PanierTelechargementGeoportail'">
+          <Field name="diffusionmode"
+                 string="download"
+                 store="true" index="true"/>
+        </xsl:if>
+      </xsl:for-each>
+
+      <xsl:for-each select="mri:descriptiveKeywords[
+                          contains(*/mri:thesaurusName/*/cit:title/gco:CharacterString,
+                                   'Mots-clés InfraSIG')]/*/mri:keyword">
+        <xsl:variable name="keywordOfficialResource" select="gco:CharacterString"/>
+        <xsl:if test="$keywordOfficialResource = 'Ressource officielle wallonne'">
+          <Field name="officialResource"
+                 string="Wallonie"
+                 store="true" index="true"/>
+        </xsl:if>
+        <xsl:if test="$keywordOfficialResource = 'Reporting INSPIRE'">
+          <Field name="officialResource"
+                 string="INSPIRE"
+                 store="true" index="true"/>
+        </xsl:if>
+
+      </xsl:for-each>
+
+      <xsl:for-each select="mri:descriptiveKeywords[
+                         contains(*/mri:thesaurusName/*/cit:title/gco:CharacterString,
+                                   'Thèmes du géoportail wallon')]/*/mri:keyword">
+        <xsl:variable name="keywordGeoportailthesaurus" select="gco:CharacterString"/>
+        <xsl:variable name="geoportailThemeTest"
+                      select="$geoportail-wallon-theme[skos:prefLabel = $keywordGeoportailthesaurus]/@rdf:about"/>
+        <xsl:if test="$geoportailThemeTest != ''">
+          <xsl:variable name="geoportailThemeValueFR"
+                        select="$geoportail-wallon-theme[@rdf:about=$geoportailThemeTest]/skos:prefLabel[@xml:lang='fr']"/>
+          <xsl:variable name="geoportailThemeValueEN"
+                        select="$geoportail-wallon-theme[@rdf:about=$geoportailThemeTest]/skos:prefLabel[@xml:lang='en']"/>
+          <Field name="geoportailthemelabel" string="{$geoportailThemeTest}={$geoportailThemeValueFR}|{$geoportailThemeValueEN}" store="true"
+                 index="true"/>
+          <Field name="geoportailthemelabelnohierarchy" string="{$geoportailThemeTest}" store="true"
+                 index="true"/>
+        </xsl:if>
+      </xsl:for-each>
+
+
 
 
       <xsl:for-each select="//mri:MD_Keywords">
@@ -626,6 +707,18 @@
         <xsl:copy-of select="gn-fn-iso19115-3.2018:index-field('format', ., $langId)"/>
       </xsl:for-each>
 
+
+      <xsl:for-each select="mrd:transferOptions/*/mrd:onLine/*">
+        <xsl:if test="contains(cit:protocol/gco:CharacterString,'WWW:LINK-1.0-http--link') and
+                      (cit:function/cit:CI_OnLineFunctionCode/@codeListValue  = 'browsing') and
+                      (cit:applicationProfile/gco:CharacterString='' or count(cit:applicationProfile/gco:CharacterString) = 0)">
+          <Field name="diffusionmode" string="thematicmap" store="true" index="true"/>
+        </xsl:if>
+        <xsl:if test="contains(cit:protocol/gco:CharacterString,'ESRI:REST') and
+                      (cit:function/cit:CI_OnLineFunctionCode/@codeListValue  = 'browsing')">
+          <Field name="diffusionmode" string="walonmap" store="true" index="true"/>
+        </xsl:if>
+      </xsl:for-each>
 
       <!-- TODO: Need a rework -->
       <xsl:for-each select="mrd:transferOptions/mrd:MD_DigitalTransferOptions">
@@ -1040,6 +1133,26 @@
       <Field name="{$fieldPrefix}RoleAndUuid" string="{$role}|{string(.)}" store="true" index="true"/>
     </xsl:for-each>
 
+
+    <xsl:choose>
+      <xsl:when test="matches($orgName, '.*\(.*\)')">
+        <xsl:variable name="service"
+                      select="substring-before(substring-after($orgName, '('), ')')"/>
+        <Field name="{$fieldPrefix}orgNameTree"
+               string="{$service}"
+               store="true" index="true"/>
+      </xsl:when>
+      <xsl:when test="lower-case($orgName) = 'région wallonne'">
+        <Field name="{$fieldPrefix}orgNameTree"
+               string="{$orgName}"
+               store="true" index="true"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <Field name="{$fieldPrefix}orgNameTree"
+               string="Autre - {cit:name/gco:CharacterString}"
+               store="true" index="true"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
 
