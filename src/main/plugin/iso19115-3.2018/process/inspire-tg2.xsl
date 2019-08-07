@@ -277,6 +277,23 @@ SQL query to get list value
   </xsl:template>
 
 
+  <!--
+  Removal of
+  <mdb:referenceSystemInfo xmlns:geonet="http://www.fao.org/geonetwork">
+      <mrs:MD_ReferenceSystem>
+         <mrs:referenceSystemIdentifier>
+            <mcc:MD_Identifier>
+               <mcc:code>
+                  <gco:CharacterString>http://www.opengis.net/def/crs/EPSG/0/84</gco:CharacterString>
+               </mcc:code>
+            </mcc:MD_Identifier>
+         </mrs:referenceSystemIdentifier>
+      </mrs:MD_ReferenceSystem>
+  </mdb:referenceSystemInfo>
+  -->
+  <xsl:template match="mdb:referenceSystemInfo[.//mcc:code/* = 'http://www.opengis.net/def/crs/EPSG/0/84']"/>
+
+
   <!-- Remove geonet:* elements. -->
   <xsl:template match="gn:*" priority="2"/>
   
