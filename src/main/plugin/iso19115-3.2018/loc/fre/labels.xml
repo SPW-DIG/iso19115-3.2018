@@ -7083,7 +7083,7 @@ diffusion restreinte.
     <label>Spécification</label>
     <description>Titre de la spécification</description>
     <help></help>
-    <helper editorMode="radio_linebreak"
+    <!--<helper editorMode="radio_linebreak"
             displayIf="ancestor::node()[name()='mdb:MD_Metadata']/mdb:identificationInfo/mri:MD_DataIdentification">
       <option value="RÈGLEMENT (UE) N o 1089/2010 DE LA COMMISSION du 23 novembre 2010 portant modalités d'application de la directive 2007/2/CE du Parlement européen et du Conseil en ce qui concerne l'interopérabilité des séries et des services de données géographiques">
         RÈGLEMENT (UE) N o 1089/2010 DE LA COMMISSION du 23 novembre 2010
@@ -7154,7 +7154,7 @@ diffusion restreinte.
         3 (WFS direct)
       </option>
     </helper>
-
+-->
 
     <help for="inspire"><![CDATA[<b>Exigence INSPIRE sur la conformité:</b>
     Les exigences de conformité seront remplies au moyen des éléments

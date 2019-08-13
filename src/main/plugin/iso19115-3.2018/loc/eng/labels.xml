@@ -4327,7 +4327,7 @@
     <label>Specification</label>
     <description></description>
     <help></help>
-    <helper editorMode="radio_linebreak"
+    <!--<helper editorMode="radio_linebreak"
             displayIf="ancestor::node()[name()='mdb:MD_Metadata']/mdb:identificationInfo/mri:MD_DataIdentification">
       <option value="COMMISSION REGULATION (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards interoperability of spatial data sets and services">
         COMMISSION REGULATION (EU) No 1089/2010 of 23 November 2010 implementing
@@ -4396,7 +4396,7 @@
         Guide INSPIRE sur les services de téléchargement – classe de conformité
         3 (WFS direct)
       </option>
-    </helper>
+    </helper>-->
   </element>
 
   <element name="cit:title" id="360.0"
