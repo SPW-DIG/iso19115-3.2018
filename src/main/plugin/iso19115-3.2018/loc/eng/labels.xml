@@ -4299,7 +4299,7 @@
     <label>Format name</label>
     <description>Name of the data transfer format(s)</description>
     <help>File or link format name</help>
-    <helper>
+    <!--<helper>
       <option value="Text">Text</option>
       <option value="XLS">XLS</option>
       <option value="ESRI Shapefile">ESRI Shapefile</option>
@@ -4319,7 +4319,7 @@
       <option value="JPEG">JPEG</option>
       <option value="OGC:WMC">OGC:WMC</option>
       <option value="OGC:OWS-C">OGC OWS Context</option>
-    </helper>
+    </helper>-->
   </element>
 
   <element name="cit:title" id="360.0"
