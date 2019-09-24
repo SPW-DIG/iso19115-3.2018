@@ -54,7 +54,12 @@
     <for name="mdq:measureDescription" use="textarea"/>
     <for name="mri:purpose" use="textarea"/>
     <for name="mrd:orderingInstructions" use="textarea"/>
-    <for name="mco:otherConstraints" use="textarea"/>
+<!--    <for name="mco:otherConstraints" use="textarea"/>-->
+    <for name="mco:otherConstraints" use="data-gn-keyword-picker">
+      <directiveAttributes data-thesaurus-key="external.theme.access_use_conditions"
+                           data-thesaurus-concept-id-attribute="xlinkCOLONhref"
+                           data-display-definition="true"/>
+    </for>
     <for name="mri:statement" use="textarea"/>
     <for name="mri:supplementalInformation" use="textarea"/>
     <for name="gmd:specificUsage" use="textarea"/>
@@ -1179,7 +1184,7 @@
             <directiveAttributes data-thesaurus-key="external.theme.httpregistrymetawalcodelistmediatypes-media-types"
                                data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
           </field>
-          
+
           <action type="add"
                   btnLabel="addAnotherFormat"
                   or="distributionFormat"
@@ -1286,6 +1291,8 @@
           <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:resourceConstraints/mco:MD_LegalConstraints/mco:accessConstraints"/>
           <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:resourceConstraints/mco:MD_LegalConstraints/mco:useConstraints"/>
           <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:resourceConstraints/mco:MD_LegalConstraints/mco:otherConstraints"/>
+
+
           <!-- TODO: Probably provide a add action to add a default value if none defined. -->
         </section>
 
