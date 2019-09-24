@@ -120,7 +120,7 @@
             </xsl:when>
             <xsl:otherwise>
               <!-- <xsl:value-of select="normalize-space(string(.))"/> -->
-              <!-- Index all text nodes except those that are in a bounding 
+              <!-- Index all text nodes except those that are in a bounding
                    polygon -->
               <xsl:for-each select="//text()[not(ancestor::gex:EX_BoundingPolygon) and normalize-space()!='']">
                  <xsl:value-of select="concat(.,' ')"/>
@@ -171,7 +171,7 @@
     <!--<xsl:message><xsl:value-of select="$fieldName"/>:<xsl:value-of select="normalize-space($value)"/> (<xsl:value-of select="$langId"/>) </xsl:message>-->
     <xsl:if test="normalize-space($value) != ''">
       <Field name="{$fieldName}"
-             string="{normalize-space($value)}"
+             string="{$value}"
              store="{$store}"
              index="{$index}"/>
     </xsl:if>
@@ -229,7 +229,7 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
-  
+
 
   <xsl:template name="CommonFieldsFactory">
     <xsl:param name="lang" select="$documentMainLanguage"/>
@@ -269,7 +269,6 @@
           </xsl:for-each>
         </xsl:attribute>
       </Field>
-
 
       <xsl:for-each select="mri:citation/*">
         <xsl:for-each select="cit:identifier/mcc:MD_Identifier/mcc:code">
@@ -871,7 +870,7 @@
         <xsl:if test="count($attributes) > 0">
           "attributeTable" : [
           <xsl:for-each select="$attributes">
-            {"name": "<xsl:value-of select="gn-fn-index:json-escape(*/gfc:memberName/*/text())"/>",
+            {"name": "<xsl:value-of select="gn-fn-index:json-escape(*/gfc:memberName/text())"/>",
             "definition": "<xsl:value-of select="gn-fn-index:json-escape(*/gfc:definition/*/text())"/>",
             "code": "<xsl:value-of select="*/gfc:code/*/text()"/>",
             "link": "<xsl:value-of select="*/gfc:code/*/@xlink:href"/>",
