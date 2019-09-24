@@ -376,7 +376,7 @@
       <name>srv:serviceTypeVersion</name>
     </exclude>
   </multilingualFields>
-  
+
   <tableFields>
     <!-- This is an example for organisation table layout.
     19115-3 being more flexible with link between orgs and individual,
@@ -1174,8 +1174,12 @@
 
           <!-- TODO: Format may be associated with a distributor or not ? -->
           <field name="format"
-                 xpath="/mdb:MD_Metadata/mdb:distributionInfo/mrd:MD_Distribution/mrd:distributionFormat/mrd:MD_Format/mrd:formatSpecificationCitation"/>
-
+                 xpath="/mdb:MD_Metadata/mdb:distributionInfo/mrd:MD_Distribution/mrd:distributionFormat/mrd:MD_Format/mrd:formatSpecificationCitation"
+                 use="data-gn-keyword-picker">
+            <directiveAttributes data-thesaurus-key="external.theme.httpregistrymetawalcodelistmediatypes-media-types"
+                               data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
+          </field>
+          
           <action type="add"
                   btnLabel="addAnotherFormat"
                   or="distributionFormat"
