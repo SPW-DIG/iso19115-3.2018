@@ -57,8 +57,7 @@
 <!--    <for name="mco:otherConstraints" use="textarea"/>-->
     <for name="mco:otherConstraints" use="data-gn-keyword-picker">
       <directiveAttributes data-thesaurus-key="external.theme.access_use_conditions"
-                           data-thesaurus-concept-id-attribute="xlinkCOLONhref"
-                           data-display-definition="true"/>
+                           data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>
     <for name="mri:statement" use="textarea"/>
     <for name="mri:supplementalInformation" use="textarea"/>
