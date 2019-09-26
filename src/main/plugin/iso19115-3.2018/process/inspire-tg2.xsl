@@ -99,7 +99,7 @@ SQL query to get list value
         <mri:thesaurusName>
           <cit:CI_Citation>
             <cit:title>
-              <gcx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialScope#">Spatial scope</gcx:Anchor>
+              <gcx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialScope#">Champ géographique</gcx:Anchor>
             </cit:title>
             <cit:date>
               <cit:CI_Date>
@@ -296,7 +296,7 @@ SQL query to get list value
 
   <!-- Remove geonet:* elements. -->
   <xsl:template match="gn:*" priority="2"/>
-  
+
   <!-- Copy everything. -->
   <xsl:template match="@*|node()">
     <xsl:copy>
