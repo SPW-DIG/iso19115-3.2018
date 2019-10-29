@@ -109,6 +109,7 @@
          xpath="/mdb:MD_Metadata/mdb:distributionInfo/mrd:MD_Distribution/mrd:distributionFormat/mrd:MD_Format/mrd:formatSpecificationCitation/cit:CI_Citation/cit:title"
          use="data-gn-keyword-picker">
       <directiveAttributes data-thesaurus-key="external.theme.httpregistrymetawalcodelistmediatypes-media-types"
+                           data-number-of-suggestions="200"
                            data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>
 
@@ -1181,7 +1182,8 @@
                  xpath="/mdb:MD_Metadata/mdb:distributionInfo/mrd:MD_Distribution/mrd:distributionFormat/mrd:MD_Format/mrd:formatSpecificationCitation"
                  use="data-gn-keyword-picker">
             <directiveAttributes data-thesaurus-key="external.theme.httpregistrymetawalcodelistmediatypes-media-types"
-                               data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
+                                 data-number-of-suggestions="200"
+                                 data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
           </field>
 
           <action type="add"
