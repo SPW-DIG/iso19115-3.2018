@@ -716,8 +716,6 @@
 
 
 
-
-
       <!-- FIXME: BrowseGraphic needs improvement - there are changes
            to get URL from mcc:linkage rather than mcc:fileName and
            mcc:fileDescription - see extract-thumnails.xsl -->
