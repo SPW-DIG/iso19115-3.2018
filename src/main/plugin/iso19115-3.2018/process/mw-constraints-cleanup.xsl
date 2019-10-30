@@ -41,6 +41,12 @@
   <xsl:variable name="isInspireRecord"
                 select="count(//mri:keyword[gco:CharacterString = 'Reporting INSPIRE']) > 0"/>
 
+  <xsl:variable name="isRestrictedA1"
+                select="count(//mco:otherConstraints/*[contains(., 'DataSPW-CPA-TypeA1')]) > 0"/>
+
+  <xsl:variable name="isRestrictedD1"
+                select="count(//mco:otherConstraints/*[contains(., 'DataSPW-CPA-TypeD1')]) > 0"/>
+
   <!-- TODO: Define for service -->
   <!--
   We skip the update for services.
@@ -54,11 +60,41 @@
                             not($isService)
                             and following-sibling::*[1]/name(.) != 'mri:resourceConstraints']"
                 priority="2">
+    <!--
+SQL :
+* vérifier D1 ou A1
+* uselimitation
+* otherRestriction
+* count(resourceConstraints)
 
-    <!-- Explain how we know something is restricted ? -->
-    <xsl:variable name="isRestricted"
-                  select="false()"/>
+WITH ns AS (
+select ARRAY[ARRAY['xlink', 'http://www.w3.org/1999/xlink'],
+       ARRAY['mdb', 'http://standards.iso.org/iso/19115/-3/mdb/2.0'],
+       ARRAY['cit', 'http://standards.iso.org/iso/19115/-3/cit/2.0'],
+       ARRAY['mri', 'http://standards.iso.org/iso/19115/-3/mri/1.0'],
+       ARRAY['mco', 'http://standards.iso.org/iso/19115/-3/mco/1.0'],
+       ARRAY['xsi', 'http://www.w3.org/2001/XMLSchema-instance'],
+       ARRAY['gco', 'http://standards.iso.org/iso/19115/-3/gco/1.0']] AS n
+)
 
+SELECT distinct(unnest(xpath('//mdb:identificationInfo/*/mri:citation/*/cit:title/*/text()',
+ XMLPARSE(DOCUMENT data), n)))::text  AS node,
+ unnest(xpath('//mco:uselimitation/*/text()',
+ XMLPARSE(DOCUMENT data), n))::text  AS uselimitation,
+ unnest(xpath('//mco:otherConstraints/*/text()',
+ XMLPARSE(DOCUMENT data), n))::text  AS otherConstraints,
+ unnest(xpath('count(//mco:otherConstraints/*[contains(text(), ''DataSPW-CPA-TypeA1'')]) > 0',
+ XMLPARSE(DOCUMENT data), n))::text  AS A1,
+ unnest(xpath('count(//mco:otherConstraints/*[contains(text(), ''DataSPW-CPA-TypeD1'')]) > 0',
+ XMLPARSE(DOCUMENT data), n))::text  AS D1,
+ unnest(xpath('count(//mri:resourceConstraints)',
+ XMLPARSE(DOCUMENT data), n))::text  AS nbRC
+FROM metadata, ns
+WHERE data LIKE '%%'
+-- WHERE data LIKE '%Reporting INSPIRE%'
+
+
+     -->
     <xsl:choose>
       <xsl:when test="$isInspireRecord">
 
@@ -66,8 +102,7 @@
           <mco:MD_LegalConstraints>
             <mco:accessConstraints>
               <mco:MD_RestrictionCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_RestrictionCode"
-                                      codeListValue="{
-                                        if ($isRestricted) then 'license' else 'otherRestrictions'}"/>
+                                      codeListValue="otherRestrictions"/>
             </mco:accessConstraints>
             <mco:otherConstraints>
               <gcx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/noLimitations">No limitations to public access</gcx:Anchor>
@@ -88,55 +123,26 @@
 
             <mco:otherConstraints>
               <xsl:choose>
-                <xsl:when test="$isRestricted">
-                  <gco:CharacterString>ACCÈS : Les conditions générales d'accès s’appliquent (https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGA.pdf) mais sont restreintes ou étendues par les conditions particulières de type D1 (https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CPA-TypeD1.pdf)</gco:CharacterString>
+                <xsl:when test="$isRestrictedD1">
+                  <gcx:Anchor xlink:href="https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CPA-TypeD1.pdf">Les conditions générales d'accès s’appliquent mais sont restreintes ou étendues par les conditions particulières de type D1.</gcx:Anchor>
+                </xsl:when>
+                <xsl:when test="$isRestrictedA1">
+                  <gcx:Anchor xlink:href="https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CPA-TypeA1.pdf">Les conditions générales d'accès s’appliquent mais sont restreintes ou étendues par les conditions particulières de type A1.</gcx:Anchor>
                 </xsl:when>
                 <xsl:otherwise>
-                  <!-- Here we could even use an Anchor ? -->
-                  <gco:CharacterString>ACCÈS : Les conditions générales d'accès s’appliquent (http://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGA.pdf). </gco:CharacterString>
+                  <gcx:Anchor xlink:href="http://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGA.pdf">Les conditions générales d'accès s’appliquent.</gcx:Anchor>
                 </xsl:otherwise>
               </xsl:choose>
             </mco:otherConstraints>
 
             <mco:otherConstraints>
-              <!-- Here we could even use an Anchor ? -->
-              <gco:CharacterString>UTILISATION : Les conditions générales d'utilisation s'appliquent (http://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGU.pdf)</gco:CharacterString>
+              <gcx:Anchor xlink:href="http://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGU.pdf">Les conditions générales d'utilisation s'appliquent.</gcx:Anchor>
             </mco:otherConstraints>
           </mco:MD_LegalConstraints>
         </mri:resourceConstraints>
       </xsl:when>
       <xsl:otherwise>
-        <!-- TODO: Define if not INSPIRE -->
-        <mri:resourceConstraints>
-          <mco:MD_LegalConstraints>
-            <mco:accessConstraints>
-              <mco:MD_RestrictionCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_RestrictionCode"
-                                      codeListValue="otherRestrictions"/>
-            </mco:accessConstraints>
-
-            <mco:otherConstraints>
-              <gcx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/noLimitations">No
-                limitations to public access</gcx:Anchor>
-            </mco:otherConstraints>
-          </mco:MD_LegalConstraints>
-        </mri:resourceConstraints>
-
-        <mri:resourceConstraints>
-          <mco:MD_LegalConstraints>
-            <mco:useLimitation>
-              <gco:CharacterString>Conditions d'accès et d'utilisation</gco:CharacterString>
-            </mco:useLimitation>
-
-            <mco:useConstraints>
-              <mco:MD_RestrictionCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_RestrictionCode"
-                                      codeListValue="otherRestrictions"/>
-            </mco:useConstraints>
-
-            <mco:otherConstraints>
-              <gco:CharacterString>Description des autres contraintes (eg. CGI, Licence)</gco:CharacterString>
-            </mco:otherConstraints>
-          </mco:MD_LegalConstraints>
-        </mri:resourceConstraints>
+        <xsl:copy-of select="../mri:resourceConstraints"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
