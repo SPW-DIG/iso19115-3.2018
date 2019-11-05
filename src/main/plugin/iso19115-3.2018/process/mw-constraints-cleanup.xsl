@@ -91,7 +91,7 @@ SELECT distinct(unnest(xpath('//mdb:identificationInfo/*/mri:citation/*/cit:titl
  XMLPARSE(DOCUMENT data), n))::text  AS nbRC
 FROM metadata, ns
 WHERE data LIKE '%%'
--- WHERE data LIKE '%Reporting INSPIRE%'
+-- WHERE data LIKE '%Reporting INSPIRE<%'
 
 
      -->
@@ -122,6 +122,14 @@ WHERE data LIKE '%%'
             </mco:useConstraints>
 
             <mco:otherConstraints>
+              <gcx:Anchor xlink:href="http://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGU.pdf">Les conditions générales d'utilisation s'appliquent.</gcx:Anchor>
+            </mco:otherConstraints>
+
+            <mco:otherConstraints>
+              <gcx:Anchor xlink:href="http://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGA.pdf">Les conditions générales d'accès s’appliquent.</gcx:Anchor>
+            </mco:otherConstraints>
+
+            <mco:otherConstraints>
               <xsl:choose>
                 <xsl:when test="$isRestrictedD1">
                   <gcx:Anchor xlink:href="https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CPA-TypeD1.pdf">Les conditions générales d'accès s’appliquent mais sont restreintes ou étendues par les conditions particulières de type D1.</gcx:Anchor>
@@ -129,14 +137,7 @@ WHERE data LIKE '%%'
                 <xsl:when test="$isRestrictedA1">
                   <gcx:Anchor xlink:href="https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CPA-TypeA1.pdf">Les conditions générales d'accès s’appliquent mais sont restreintes ou étendues par les conditions particulières de type A1.</gcx:Anchor>
                 </xsl:when>
-                <xsl:otherwise>
-                  <gcx:Anchor xlink:href="http://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGA.pdf">Les conditions générales d'accès s’appliquent.</gcx:Anchor>
-                </xsl:otherwise>
               </xsl:choose>
-            </mco:otherConstraints>
-
-            <mco:otherConstraints>
-              <gcx:Anchor xlink:href="http://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGU.pdf">Les conditions générales d'utilisation s'appliquent.</gcx:Anchor>
             </mco:otherConstraints>
           </mco:MD_LegalConstraints>
         </mri:resourceConstraints>
