@@ -34,6 +34,7 @@
                 select="count(//mco:otherConstraints/*[contains(., 'DataSPW-CPU-TypeA')]) > 0"/>
 
 
+
   <!-- Add helpdesk email to SPW Org when not set. -->
   <xsl:template match="cit:CI_Organisation[
                               cit:name/*/text() = 'Service public de Wallonie (SPW)'
@@ -135,6 +136,7 @@ WHERE data LIKE '%Reporting INSPIRE<%'
             </mri:resourceConstraints>
           </xsl:when>
           <xsl:otherwise>
+
             <mri:resourceConstraints>
               <mco:MD_LegalConstraints>
                 <mco:accessConstraints>
@@ -164,45 +166,27 @@ WHERE data LIKE '%Reporting INSPIRE<%'
                 </mco:useConstraints>
 
                 <mco:otherConstraints>
-                  <gcx:Anchor xlink:href="http://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGU.pdf">
-                    Les conditions générales d'utilisation s'appliquent.
-                  </gcx:Anchor>
-                </mco:otherConstraints>
-
-                <mco:otherConstraints>
-                  <gcx:Anchor xlink:href="http://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGA.pdf">
-                    Les conditions générales d'accès s’appliquent.
-                  </gcx:Anchor>
-                </mco:otherConstraints>
-
-                <mco:otherConstraints>
                   <xsl:choose>
-                    <xsl:when test="$isRestrictedD1">
-                      <gcx:Anchor
-                        xlink:href="https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CPA-TypeD1.pdf">
-                        Les conditions générales d'accès s’appliquent mais sont restreintes ou étendues par les
-                        conditions particulières de type D1.
-                      </gcx:Anchor>
-                    </xsl:when>
                     <xsl:when test="$isRestrictedA1">
-                      <gcx:Anchor
-                        xlink:href="https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CPA-TypeA1.pdf">
-                        Les conditions générales d'accès s’appliquent mais sont restreintes ou étendues par les
-                        conditions particulières de type A1.
-                      </gcx:Anchor>
+                      <gco:CharacterString>ACCÈS : Les conditions générales d'accès s’appliquent (https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGA.pdf) mais sont restreintes par les conditions particulières de type A1 (https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CPA-TypeA1.pdf).
+                        UTILISATION : Les conditions générales d'utilisation s'appliquent (https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGU.pdf).</gco:CharacterString>
+                    </xsl:when>
+                    <xsl:when test="$isRestrictedD1">
+                      <gco:CharacterString>ACCÈS : Les conditions générales d'accès s’appliquent (https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGA.pdf) mais sont restreintes par les conditions particulières de type D1 (https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CPA-TypeD1.pdf).
+                        UTILISATION : Les conditions générales d'utilisation s'appliquent (https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGU.pdf).</gco:CharacterString>
                     </xsl:when>
                     <xsl:when test="$isRestrictedCPUA">
-                      <gcx:Anchor
-                        xlink:href="https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CPU-TypeA.pdf">
-                        Les conditions générales d'utilisation s'appliquent mais sont restreintes par les conditions particulières de type A.
-                      </gcx:Anchor>
+                      <gco:CharacterString>ACCÈS : Les conditions générales d'accès s’appliquent (https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGA.pdf).
+                        UTILISATION : Les conditions générales d'utilisation s'appliquent (https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGU.pdf) mais sont étendues par les conditions particulières de type A(https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CPU-TypeA.pdf).</gco:CharacterString>
                     </xsl:when>
                     <xsl:when test="$isRestrictedCPUC">
-                      <gcx:Anchor
-                        xlink:href="https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CPU-TypeC.pdf">
-                        Les conditions générales d'utilisation s'appliquent mais sont restreintes par les conditions particulières de type C.
-                      </gcx:Anchor>
+                      <gco:CharacterString>ACCÈS : Les conditions générales d'accès s’appliquent (https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGA.pdf).
+                        UTILISATION : Les conditions générales d'utilisation s'appliquent (https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGU.pdf) mais sont restreintes par les conditions particulières de type C (https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CPU-TypeC.pdf).</gco:CharacterString>
                     </xsl:when>
+                    <xsl:otherwise>
+                      <gco:CharacterString>ACCÈS : Les conditions générales d'accès s’appliquent (https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGA.pdf).
+                        UTILISATION : Les conditions générales d'utilisation s'appliquent (https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGU.pdf).</gco:CharacterString>
+                    </xsl:otherwise>
                   </xsl:choose>
                 </mco:otherConstraints>
               </mco:MD_LegalConstraints>
