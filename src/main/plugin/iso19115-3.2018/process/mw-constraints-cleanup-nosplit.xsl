@@ -127,11 +127,7 @@ WHERE data LIKE '%Reporting INSPIRE<%'
                 <gco:CharacterString>Conditions d'utilisation spécifiques</gco:CharacterString>
               </mco:useLimitation>
               <mco:otherConstraints>
-                <gcx:Anchor
-                  xlink:href="https://geoportail.wallonie.be/files/documents/ConditionsSPW/LicServicesSPW.pdf">Les
-                  conditions d'utilisation du service sont régies par les Conditions d’accès et d’utilisation des
-                  services web géographiques de visualisation du Service public de Wallonie.
-                </gcx:Anchor>
+                <gco:CharacterString>Les conditions d'utilisation du service sont régies par les Conditions d’accès et d’utilisation des services web géographiques de visualisation du Service public de Wallonie consultables à l'adresse https://geoportail.wallonie.be/files/documents/ConditionsSPW/LicServicesSPW.pdf.</gco:CharacterString>
               </mco:otherConstraints>
             </mri:resourceConstraints>
           </xsl:when>
