@@ -118,17 +118,19 @@ WHERE data LIKE '%Reporting INSPIRE<%'
               </mco:MD_LegalConstraints>
             </mri:resourceConstraints>
             <mri:resourceConstraints>
-              <mco:useConstraints>
-                <mco:MD_RestrictionCode
-                  codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_RestrictionCode"
-                  codeListValue="otherRestrictions"/>
-              </mco:useConstraints>
-              <mco:useLimitation>
-                <gco:CharacterString>Conditions d'utilisation spécifiques</gco:CharacterString>
-              </mco:useLimitation>
-              <mco:otherConstraints>
-                <gco:CharacterString>Les conditions d'utilisation du service sont régies par les Conditions d’accès et d’utilisation des services web géographiques de visualisation du Service public de Wallonie consultables à l'adresse https://geoportail.wallonie.be/files/documents/ConditionsSPW/LicServicesSPW.pdf.</gco:CharacterString>
-              </mco:otherConstraints>
+              <mco:MD_LegalConstraints>
+                <mco:useConstraints>
+                  <mco:MD_RestrictionCode
+                    codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_RestrictionCode"
+                    codeListValue="otherRestrictions"/>
+                </mco:useConstraints>
+                <mco:useLimitation>
+                  <gco:CharacterString>Conditions d'utilisation spécifiques</gco:CharacterString>
+                </mco:useLimitation>
+                <mco:otherConstraints>
+                  <gco:CharacterString>Les conditions d'utilisation du service sont régies par les Conditions d’accès et d’utilisation des services web géographiques de visualisation du Service public de Wallonie consultables à l'adresse https://geoportail.wallonie.be/files/documents/ConditionsSPW/LicServicesSPW.pdf.</gco:CharacterString>
+                </mco:otherConstraints>
+              </mco:MD_LegalConstraints>
             </mri:resourceConstraints>
           </xsl:when>
           <xsl:otherwise>
