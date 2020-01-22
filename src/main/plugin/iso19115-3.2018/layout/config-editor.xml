@@ -463,6 +463,16 @@
         <for name="cit:CI_Individual"/>
         <for name="cit:CI_Organisation"/>
       </flatModeExceptions>
+
+      <thesaurusList>
+        <thesaurus key="external.theme.httpinspireeceuropaeutheme-theme" transformations="to-iso19115-3.2018-keyword-with-anchor"/>
+        <thesaurus key="external.theme.httpinspireeceuropaeumetadatacodelistSpatialScope-SpatialScope" transformations="to-iso19115-3.2018-keyword-with-anchor"/>
+        <thesaurus key="external.theme.httpinspireeceuropaeumetadatacodelistPriorityDataset-PriorityDataset" transformations="to-iso19115-3.2018-keyword-with-anchor"/>
+        <thesaurus key="external.theme.gemet" transformations="to-iso19115-3-keyword"/>
+        <thesaurus key="external.theme.infraSIG" transformations="to-iso19115-3-keyword"/>
+        <thesaurus key="external.theme.themes_geoportail_wallon" transformations="to-iso19115-3-keyword"/>
+        <thesaurus key="external.theme.Themes_geoportail_wallon" transformations="to-iso19115-3-keyword"/>
+      </thesaurusList>
     </view>
 
     <view name="metawal" upAndDownControlHidden="true">
@@ -1439,7 +1449,9 @@
         <for name="mcc:processor"/>
       </flatModeExceptions>
       <thesaurusList>
-        <thesaurus key="external.theme.inspire-theme" transformations="to-iso19115-3-keyword"/>
+        <thesaurus key="external.theme.httpinspireeceuropaeutheme-theme" transformations="to-iso19115-3.2018-keyword-with-anchor"/>
+        <thesaurus key="external.theme.httpinspireeceuropaeumetadatacodelistSpatialScope-SpatialScope" transformations="to-iso19115-3.2018-keyword-with-anchor"/>
+        <thesaurus key="external.theme.httpinspireeceuropaeumetadatacodelistPriorityDataset-PriorityDataset" transformations="to-iso19115-3.2018-keyword-with-anchor"/>
         <thesaurus key="external.theme.gemet" transformations="to-iso19115-3-keyword"/>
         <thesaurus key="external.theme.infraSIG" transformations="to-iso19115-3-keyword"/>
         <thesaurus key="external.theme.themes_geoportail_wallon" transformations="to-iso19115-3-keyword"/>
@@ -1541,6 +1553,16 @@
         <section xpath="/mdb:MD_Metadata/mdb:applicationSchemaInfo" or="applicationSchemaInfo"
                  in="/mdb:MD_Metadata"/>
       </tab>
+
+      <thesaurusList>
+        <thesaurus key="external.theme.httpinspireeceuropaeutheme-theme" transformations="to-iso19115-3.2018-keyword-with-anchor"/>
+        <thesaurus key="external.theme.httpinspireeceuropaeumetadatacodelistSpatialScope-SpatialScope" transformations="to-iso19115-3.2018-keyword-with-anchor"/>
+        <thesaurus key="external.theme.httpinspireeceuropaeumetadatacodelistPriorityDataset-PriorityDataset" transformations="to-iso19115-3.2018-keyword-with-anchor"/>
+        <thesaurus key="external.theme.gemet" transformations="to-iso19115-3-keyword"/>
+        <thesaurus key="external.theme.infraSIG" transformations="to-iso19115-3-keyword"/>
+        <thesaurus key="external.theme.themes_geoportail_wallon" transformations="to-iso19115-3-keyword"/>
+        <thesaurus key="external.theme.Themes_geoportail_wallon" transformations="to-iso19115-3-keyword"/>
+      </thesaurusList>
     </view>
     <view name="xml">
       <sidePanel>
