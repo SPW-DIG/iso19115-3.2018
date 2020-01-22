@@ -577,7 +577,7 @@
   </xsl:template>
 
   <!-- Sextant / Template adding nilReason attribut with withheld value
-  for some protocols. -->
+  for some protocols.
   <xsl:template match="cit:linkage" priority="10">
     <xsl:choose>
       <xsl:when test="
@@ -597,6 +597,7 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
+  -->
 
   <!-- Remove empty DQ elements. -->
   <xsl:template match="mdb:dataQualityInfo[count(*) = 0]"/>
