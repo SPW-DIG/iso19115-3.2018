@@ -234,4 +234,8 @@
   <Source>Ressource en ligne</Source>
   <inspiremainsection>INSPIRE</inspiremainsection>
   <keywordsInpire>Mots-clés relatifs à la directive INSPIRE</keywordsInpire>
+
+  <extent>Geographic bounding box</extent>
+  <freeTextKeywords>Other keywords</freeTextKeywords>
+  <noThesaurusName>Keywords</noThesaurusName>
 </strings>

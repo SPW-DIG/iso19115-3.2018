@@ -318,4 +318,7 @@
   <type>Type</type>
   <dataView>Consulter la donnée dans une application</dataView>
   <serviceView>Consulter le service dans une application</serviceView>
+  <noThesaurusName>Mots clés</noThesaurusName>
+  <extent>Étendue spatiale</extent>
+  <freeTextKeywords>Other keywords</freeTextKeywords>
 </strings>
