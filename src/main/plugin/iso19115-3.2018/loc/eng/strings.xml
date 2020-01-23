@@ -218,6 +218,10 @@
   <addDQReportOnDQ_CompletenessOmission>Décrire le nombre d'objets manquants (s'il y en a)</addDQReportOnDQ_CompletenessOmission>
   <metawalLineage>Généalogie</metawalLineage>
 
+  <inspireConformity>Conformité INSPIRE</inspireConformity>
+  <notEvaluated>Non évalué</notEvaluated>
+  <conformant>Conforme</conformant>
+  <notConformant>Non conforme</notConformant>
   <isINSPIREConform>Indiquer que la ressource est conforme à INSPIRE</isINSPIREConform>
   <isNotINSPIREConform>ou ne l'est pas</isNotINSPIREConform>
   <mw-feature-catalogue>Modèle de données</mw-feature-catalogue>
@@ -292,4 +296,8 @@
   <extent>Geographic bounding box</extent>
   <freeTextKeywords>Other keywords</freeTextKeywords>
   <noThesaurusName>Keywords</noThesaurusName>
+
+  <addCrs>Projection</addCrs>
+  <addCrs31370>Belge 1972 / Belgian Lambert 72 (EPSG:31370)</addCrs31370>
+  <addCrs3035>ETRS89 / LAEA Europe (EPSG:3035)</addCrs3035>
 </strings>

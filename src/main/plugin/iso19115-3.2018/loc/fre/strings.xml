@@ -375,4 +375,13 @@
   <noThesaurusName>Mots clés</noThesaurusName>
   <extent>Étendue spatiale</extent>
   <freeTextKeywords>Other keywords</freeTextKeywords>
+
+  <inspireConformity>Conformité INSPIRE</inspireConformity>
+  <notEvaluated>Non évalué</notEvaluated>
+  <conformant>Conforme</conformant>
+  <notConformant>Non conforme</notConformant>
+
+  <addCrs>Projection</addCrs>
+  <addCrs31370>Belge 1972 / Belgian Lambert 72 (EPSG:31370)</addCrs31370>
+  <addCrs3035>ETRS89 / LAEA Europe (EPSG:3035)</addCrs3035>
 </strings>

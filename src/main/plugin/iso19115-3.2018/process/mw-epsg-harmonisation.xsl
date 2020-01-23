@@ -36,11 +36,16 @@
   <xsl:output indent="yes" method="xml"/>
 
   <xsl:variable name="crsMap">
-    <crs code="http://www.opengis.net/def/crs/EPSG/0/31370" label="EPSG:31370" referenceSystemTypeCode="projected">EPSG:31370</crs>
-    <crs code="http://www.opengis.net/def/crs/EPSG/0/3035" label="EPSG:3035" referenceSystemTypeCode="projected">EPSG:3035</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/31370" label="Belge 1972 / Belgian Lambert 72 (EPSG:31370)" referenceSystemTypeCode="projected">EPSG:31370</crs>
+    <crs code="31370" label="Belge 1972 / Belgian Lambert 72 (EPSG:31370)" referenceSystemTypeCode="projected">EPSG:31370</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/3035" label="ETRS89 / LAEA Europe (EPSG:3035)" referenceSystemTypeCode="projected">EPSG:3035</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/3812" label="ETRS89 / Belgian Lambert 2008 (EPSG:3812)" referenceSystemTypeCode="projected">EPSG:3812</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/2154" label="RGF93 / Lambert-93 (EPSG:2154)" referenceSystemTypeCode="projected">EPSG:2154</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/4258" label="ETRS89 (EPSG:4258)" referenceSystemTypeCode="geodeticGeographic2D">EPSG:4258</crs>
     <crs code="http://www.opengis.net/def/crs/EPSG/0/4326" label="WGS 84 (EPSG:4326)" referenceSystemTypeCode="geodeticGeographic2D">EPSG:4326</crs>
-    <crs code="http://www.opengis.net/def/crs/EPSG/0/3857" label="EPSG:3857" referenceSystemTypeCode="projected">EPSG:3857</crs>
-    <crs code="http://www.opengis.net/def/crs/EPSG/0/5710" label="EPSG:5710" referenceSystemTypeCode="vertical">EPSG:5710</crs>
+    <crs code="WGS 1984" label="WGS 84 (EPSG:4326)" referenceSystemTypeCode="geodeticGeographic2D">EPSG:4326</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/3857" label="WGS 84 / Pseudo-Mercator (EPSG:3857)" referenceSystemTypeCode="projected">EPSG:3857</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/5710" label="Ostend height (EPSG:5710)" referenceSystemTypeCode="vertical">EPSG:5710</crs>
   </xsl:variable>
 
   <xsl:template match="mdb:referenceSystemInfo">
@@ -68,8 +73,7 @@
         </mdb:referenceSystemInfo>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:message>CRS not handled <xsl:value-of select="$currentCode"/> </xsl:message>
-        <xsl:copy-of select="."/>
+        <xsl:message>CRS not handled <xsl:value-of select="$currentCode"/> and removed.</xsl:message>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
