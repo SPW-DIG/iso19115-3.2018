@@ -274,15 +274,25 @@
                               contains(*/mri:thesaurusName/*/cit:title/gco:CharacterString,
                                        'Thèmes du géoportail wallon')]/*">
               <h6><xsl:value-of select="gn-fn-render:get-schema-strings($schemaStrings,'geoportailTheme')"/> :</h6>
-              <p><xsl:value-of select="string-join($metadata/mdb:identificationInfo/*/mri:descriptiveKeywords[
-                              contains(*/mri:thesaurusName/*/cit:title/gco:CharacterString,
-                                       'Thèmes du géoportail wallon')]/*/mri:keyword,';')"/></p>
+              <p>
+                <xsl:for-each select="$metadata/mdb:identificationInfo/*/mri:descriptiveKeywords[
+                                contains(*/mri:thesaurusName/*/cit:title/gco:CharacterString,
+                                         'Thèmes du géoportail wallon')]/*/mri:keyword">
+                  <xsl:variable name="txt">
+                    <xsl:call-template name="get-iso19115-3.2018-localised">
+                      <xsl:with-param name="langId" select="$langId"/>
+                    </xsl:call-template>
+                  </xsl:variable>
+                  <xsl:value-of select="$txt"/>
+                  <xsl:if test="position() != last()">, </xsl:if>
+                </xsl:for-each>
+              </p>
 
             </xsl:if>
             <xsl:if test="$metadata/mdb:identificationInfo/*/mri:descriptiveKeywords[
                               contains(*/mri:thesaurusName/*/cit:title/gco:CharacterString,
                                            'GEMET - INSPIRE themes, version 1.0')]">
-              <h6><xsl:value-of select="gn-fn-render:get-schema-strings($schemaStrings,'inspireTheme')"/> :</h6>
+              <h6><xsl:value-of select="gn-fn-render:get-schema-strings($schemaStrings,'rw-inspireTheme')"/> :</h6>
 
               <p>
                 <xsl:for-each select="$metadata/mdb:identificationInfo/*/mri:descriptiveKeywords[
@@ -858,7 +868,15 @@
           <div class="rw-fr-geoportail-section-content">
             <xsl:choose>
               <xsl:when test="$metadata/mdb:identificationInfo/*/mri:spatialResolution/mri:MD_Resolution/mri:equivalentScale/mri:MD_RepresentativeFraction/mri:denominator/gco:Integer">
-                <p><xsl:value-of select="'1:'"/><xsl:value-of select="$metadata/mdb:identificationInfo/*/mri:spatialResolution/mri:MD_Resolution/mri:equivalentScale/mri:MD_RepresentativeFraction/mri:denominator/gco:Integer"/></p>
+                <p>
+                  <xsl:for-each select="$metadata/mdb:identificationInfo/*/mri:spatialResolution/mri:MD_Resolution/mri:equivalentScale/mri:MD_RepresentativeFraction/mri:denominator/gco:Integer">
+                    <xsl:value-of select="'1:'"/>
+                    <xsl:apply-templates mode="render-value" select="."/>
+                    <xsl:if test="position() != last()">, </xsl:if>
+                  </xsl:for-each>
+                  <!--xsl:value-of select="'1:'"/>
+                  <xsl:value-of select="$metadata/mdb:identificationInfo/*/mri:spatialResolution/mri:MD_Resolution/mri:equivalentScale/mri:MD_RepresentativeFraction/mri:denominator/gco:Integer"/-->
+                </p>
               </xsl:when>
               <xsl:otherwise>
                 <xsl:value-of select="gn-fn-render:get-schema-strings($schemaStrings,'notfilledin')"/>
@@ -913,7 +931,18 @@
       <div class="rw-fr-geoportail-section-content">
         <xsl:choose>
           <xsl:when test="$metadata/mdb:resourceLineage/mrl:LI_Lineage/mrl:statement/gco:CharacterString">
-            <p><xsl:value-of select="$metadata/mdb:resourceLineage/mrl:LI_Lineage/mrl:statement/gco:CharacterString"/></p>
+            <p>
+            <xsl:for-each select="$metadata/mdb:resourceLineage/mrl:LI_Lineage/mrl:statement">
+              <xsl:variable name="txt">
+                <xsl:call-template name="get-iso19115-3.2018-localised">
+                  <xsl:with-param name="langId" select="$langId"/>
+                </xsl:call-template>
+              </xsl:variable>
+              <xsl:call-template name="addLineBreaksAndHyperlinks">
+                <xsl:with-param name="txt" select="$txt"/>
+              </xsl:call-template>
+            </xsl:for-each>
+            </p>
           </xsl:when>
           <xsl:otherwise>
             <xsl:value-of select="gn-fn-render:get-schema-strings($schemaStrings,'notfilledin')"/>
