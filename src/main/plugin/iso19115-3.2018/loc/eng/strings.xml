@@ -300,4 +300,11 @@
   <addCrs>Projection</addCrs>
   <addCrs31370>Belge 1972 / Belgian Lambert 72 (EPSG:31370)</addCrs31370>
   <addCrs3035>ETRS89 / LAEA Europe (EPSG:3035)</addCrs3035>
+  <addCrs3812>ETRS89 / Belgian Lambert 2008 (EPSG:3812)</addCrs3812>
+  <addCrs2154>RGF93 / Lambert-93 (EPSG:2154)</addCrs2154>
+  <addCrs21500>Belge 1950 (Brussels) / Belge Lambert 50 (EPSG:21500)</addCrs21500>
+  <addCrs4258>ETRS89 (EPSG:4258)</addCrs4258>
+  <addCrs4326>WGS 84 (EPSG:4326)</addCrs4326>
+  <addCrs3857>WGS 84 / Pseudo-Mercator (EPSG:3857)</addCrs3857>
+  <addCrs5710>Ostend height (EPSG:5710)</addCrs5710>
 </strings>
