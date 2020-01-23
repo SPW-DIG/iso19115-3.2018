@@ -77,6 +77,60 @@
     matching extent.
   </add-extent-from-geokeywordsHelp>
 
+  <!-- METAWAL basic form-->
+  <metawalbasicform>MW basic form</metawalbasicform>
+  <mwbf-mainInfo>Information</mwbf-mainInfo>
+  <mwbf-title>Title</mwbf-title>
+  <mwbf-representationType>Spatial representation type</mwbf-representationType>
+  <mwbf-abstract>Abstract</mwbf-abstract>
+  <mwbf-lineage>Lineage</mwbf-lineage>
+  <mwbf-keywords>Keywords</mwbf-keywords>
+  <mwbf-dateinfo>Update information</mwbf-dateinfo>
+  <mwbf-constraints>Constraints</mwbf-constraints>
+  <mwbf-access-contact>Distribution contact</mwbf-access-contact>
+  <mwbf-data-contact>Data contact</mwbf-data-contact>
+  <mwbf-metadata-contact>Metadata contact</mwbf-metadata-contact>
+  <mwbf-sidepanelhelp>
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-10">
+        <div class="alert alert-info">
+          Please provide instructions aiming to help users to complete the MTD online ressources
+        </div>
+      </div>
+    </div>
+  </mwbf-sidepanelhelp>
+  <mwbf-abstracthelp>
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-10">
+        <div class="alert alert-info">
+          Please provide instructions aiming to help users to complete the MTD abstract
+        </div>
+      </div>
+    </div>
+  </mwbf-abstracthelp>
+  <mwbf-lineagehelp>
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-10">
+        <div class="alert alert-info">
+          Please provide instructions aiming to help users to complete the MTD lineage
+        </div>
+      </div>
+    </div>
+  </mwbf-lineagehelp>
+  <mwbf-keywordhelp>
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-10">
+        <div class="alert alert-info">
+          Please provide instructions aiming to help users to complete the MTD keywords
+        </div>
+      </div>
+    </div>
+  </mwbf-keywordhelp>
+
   <!-- METAWAL View and tabs for GeoPortail view-->
   <metawal>Geoportail</metawal>
   <!--TAB 1 - Metadata-->

@@ -44,7 +44,7 @@
     <for name="mco:userNote" use="textarea"/>
     <for name="mco:handlingDescription" use="textarea"/>
     <for name="mrl:description" use="textarea"/>
-<!--    <for name="mri:abstract" use="textarea"/>-->
+    <!--    <for name="mri:abstract" use="textarea"/>-->
     <for name="mri:abstract" use="data-gn-textarea-abstract-builder"/>
     <for name="mri:credit" use="textarea"/>
     <for name="mrd:description" use="textarea"/>
@@ -54,7 +54,7 @@
     <for name="mdq:measureDescription" use="textarea"/>
     <for name="mri:purpose" use="textarea"/>
     <for name="mrd:orderingInstructions" use="textarea"/>
-<!--    <for name="mco:otherConstraints" use="textarea"/>-->
+    <!--    <for name="mco:otherConstraints" use="textarea"/>-->
     <for name="mco:otherConstraints" use="data-gn-keyword-picker">
       <directiveAttributes data-thesaurus-key="external.theme.access_use_conditions"
                            data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
@@ -122,12 +122,12 @@
 
     <for name="mdb:contact" addDirective="data-gn-directory-entry-selector">
       <directiveAttributes
-              data-template-add-action="true"
-              data-search-action="false"
-              data-popup-action="true"
-              data-template-type="contact"
-              data-filter='{"_root": "cit:CI_Responsibility"}'
-              data-variables="cit:role/cit:CI_RoleCode/@codeListValue~{role}"/>
+        data-template-add-action="true"
+        data-search-action="false"
+        data-popup-action="true"
+        data-template-type="contact"
+        data-filter='{"_root": "cit:CI_Responsibility"}'
+        data-variables="cit:role/cit:CI_RoleCode/@codeListValue~{role}"/>
     </for>
     <for name="mri:pointOfContact" addDirective="data-gn-directory-entry-selector">
       <!--<directiveAttributes
@@ -138,76 +138,76 @@
       <!-- To use an ISO19139 contact directory in an ISO19115-3 record
       use the following configuration: -->
       <directiveAttributes
-              data-template-add-action="true"
-              data-search-action="false"
-              data-popup-action="true"
-              data-template-type="contact"
-              data-filter='{"_root": "gmd:CI_ResponsibleParty"}'
-              data-variables="gmd:role/gmd:CI_RoleCode/@codeListValue~{role}"
-              data-transformation="contact-from-iso19139-to-iso19115-3.2018"/>
+        data-template-add-action="true"
+        data-search-action="false"
+        data-popup-action="true"
+        data-template-type="contact"
+        data-filter='{"_root": "gmd:CI_ResponsibleParty"}'
+        data-variables="gmd:role/gmd:CI_RoleCode/@codeListValue~{role}"
+        data-transformation="contact-from-iso19139-to-iso19115-3.2018"/>
     </for>
     <for name="mrd:distributor" addDirective="data-gn-directory-entry-selector">
       <directiveAttributes
-              data-template-add-action="true"
-              data-search-action="false"
-              data-popup-action="true"
-              data-template-type="contact"
-              data-filter='{"_root": "gmd:CI_ResponsibleParty"}'
-              data-variables="gmd:role/gmd:CI_RoleCode/@codeListValue~{role}"
-              data-transformation="contact-from-iso19139-to-iso19115-3.2018"/>
+        data-template-add-action="true"
+        data-search-action="false"
+        data-popup-action="true"
+        data-template-type="contact"
+        data-filter='{"_root": "gmd:CI_ResponsibleParty"}'
+        data-variables="gmd:role/gmd:CI_RoleCode/@codeListValue~{role}"
+        data-transformation="contact-from-iso19139-to-iso19115-3.2018"/>
     </for>
     <for name="mrl:processor" addDirective="data-gn-directory-entry-selector">
       <directiveAttributes
-              data-template-add-action="true"
-              data-search-action="false"
-              data-popup-action="true"
-              data-template-type="contact"
-              data-filter='{"_root": "gmd:CI_ResponsibleParty"}'
-              data-variables="gmd:role/gmd:CI_RoleCode/@codeListValue~{role}"
-              data-transformation="contact-from-iso19139-to-iso19115-3.2018"/>
+        data-template-add-action="true"
+        data-search-action="false"
+        data-popup-action="true"
+        data-template-type="contact"
+        data-filter='{"_root": "gmd:CI_ResponsibleParty"}'
+        data-variables="gmd:role/gmd:CI_RoleCode/@codeListValue~{role}"
+        data-transformation="contact-from-iso19139-to-iso19115-3.2018"/>
     </for>
     <for name="cit:citedResponsibleParty" addDirective="data-gn-directory-entry-selector">
       <directiveAttributes
-              data-template-add-action="true"
-              data-search-action="false"
-              data-popup-action="true"
-              data-template-type="contact"
-              data-filter='{"_root": "gmd:CI_ResponsibleParty"}'
-              data-variables="gmd:role/gmd:CI_RoleCode/@codeListValue~{role}"
-              data-transformation="contact-from-iso19139-to-iso19115-3.2018"/>
+        data-template-add-action="true"
+        data-search-action="false"
+        data-popup-action="true"
+        data-template-type="contact"
+        data-filter='{"_root": "gmd:CI_ResponsibleParty"}'
+        data-variables="gmd:role/gmd:CI_RoleCode/@codeListValue~{role}"
+        data-transformation="contact-from-iso19139-to-iso19115-3.2018"/>
     </for>
 
 
     <for name="cit:logo" addDirective="data-gn-directory-entry-selector">
       <directiveAttributes
-              data-template-add-action="true"
-              data-search-action="true"
-              data-popup-action="false"
-              data-template-type="logo"
-              data-filter='{"_root": "mcc:MD_BrowseGraphic"}'/>
+        data-template-add-action="true"
+        data-search-action="true"
+        data-popup-action="false"
+        data-template-type="logo"
+        data-filter='{"_root": "mcc:MD_BrowseGraphic"}'/>
     </for>
 
     <for name="mdq:report" addDirective="data-gn-directory-entry-selector">
       <directiveAttributes
-              data-template-add-action="true"
-              data-search-action="true"
-              data-popup-action="false"
-              data-template-type="report"
-              data-filter='{"_root": "mdq:DQ_*"}'/>
+        data-template-add-action="true"
+        data-search-action="true"
+        data-popup-action="false"
+        data-template-type="report"
+        data-filter='{"_root": "mdq:DQ_*"}'/>
     </for>
 
     <for name="mri:resourceConstraints" addDirective="data-gn-directory-entry-selector">
       <directiveAttributes
-              data-template-add-action="true"
-              data-search-action="true"
-              data-popup-action="false"
-              data-template-type="resourceConstraints"
-              data-filter='{"_root": "mco:MD_*"}'/>
+        data-template-add-action="true"
+        data-search-action="true"
+        data-popup-action="false"
+        data-template-type="resourceConstraints"
+        data-filter='{"_root": "mco:MD_*"}'/>
     </for>
 
     <for name="mri:descriptiveKeywords" addDirective="data-gn-thesaurus-selector">
       <directiveAttributes
-              data-transformation="to-iso19115-3.2018-keyword"/>
+        data-transformation="to-iso19115-3.2018-keyword"/>
     </for>
   </fields>
 
@@ -465,14 +465,102 @@
       </flatModeExceptions>
 
       <thesaurusList>
-        <thesaurus key="external.theme.httpinspireeceuropaeutheme-theme" transformations="to-iso19115-3.2018-keyword-with-anchor"/>
-        <thesaurus key="external.theme.httpinspireeceuropaeumetadatacodelistSpatialScope-SpatialScope" transformations="to-iso19115-3.2018-keyword-with-anchor"/>
-        <thesaurus key="external.theme.httpinspireeceuropaeumetadatacodelistPriorityDataset-PriorityDataset" transformations="to-iso19115-3.2018-keyword-with-anchor"/>
+        <thesaurus key="external.theme.httpinspireeceuropaeutheme-theme"
+                   transformations="to-iso19115-3.2018-keyword-with-anchor"/>
+        <thesaurus key="external.theme.httpinspireeceuropaeumetadatacodelistSpatialScope-SpatialScope"
+                   transformations="to-iso19115-3.2018-keyword-with-anchor"/>
+        <thesaurus key="external.theme.httpinspireeceuropaeumetadatacodelistPriorityDataset-PriorityDataset"
+                   transformations="to-iso19115-3.2018-keyword-with-anchor"/>
         <thesaurus key="external.theme.gemet" transformations="to-iso19115-3-keyword"/>
         <thesaurus key="external.theme.infraSIG" transformations="to-iso19115-3-keyword"/>
         <thesaurus key="external.theme.themes_geoportail_wallon" transformations="to-iso19115-3-keyword"/>
         <thesaurus key="external.theme.Themes_geoportail_wallon" transformations="to-iso19115-3-keyword"/>
       </thesaurusList>
+    </view>
+
+    <view name="metawalbasicform" upAndDownControlHidden="true" class="gn-indent-colored gn-label-above-input">
+      <sidePanel>
+        <directive data-gn-overview-manager=""/>
+        <directive data-gn-onlinesrc-list="" data-types="onlinesrc"/>
+        <text ref="mwbf-sidepanelhelp"/>
+      </sidePanel>
+      <tab id="main" default="true" mode="flat">
+
+        <section name="mwbf-mainInfo">
+          <field name="mwbf-title"
+                 xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:citation/*/cit:title"/>
+          <field name="mwbf-representationType"
+                 xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:spatialRepresentationType"/>
+          <field name="mwbf-abstract"
+                 xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:abstract"
+                 or="abstract"
+                 in="/mdb:MD_Metadata/mdb:identificationInfo/*"/>
+          <text ref="mwbf-abstracthelp"/>
+
+          <field  name="mwbf-lineage"
+                  xpath="/mdb:MD_Metadata/mdb:resourceLineage/*/mrl:statement"/>
+          <text ref="mwbf-lineagehelp"/>
+        </section>
+
+        <section name="mwbf-keywords">
+          <!-- TODO: From thesaurus ? -->
+          <field
+            xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:descriptiveKeywords[not(*/mri:thesaurusName)]/*/mri:keyword"/>
+          <action type="add"
+                  btnLabel="addOtherKeyword"
+                  or="keyword"
+                  in="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:descriptiveKeywords[not(*/mri:thesaurusName)]/mri:MD_Keywords"
+                  if="count(mdb:MD_Metadata/mdb:identificationInfo/*/mri:descriptiveKeywords[not(*/mri:thesaurusName)]) > 0">
+            <template>
+              <snippet>
+                <mri:keyword gco:nilReason="missing">
+                  <gco:CharacterString/>
+                </mri:keyword>
+              </snippet>
+            </template>
+          </action>
+          <text ref="mwbf-keywordhelp"/>
+        </section>
+
+        <section name="mwbf-dateinfo">
+          <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:citation/*/cit:date"
+                 or="date"
+                 in="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:citation/*"/>
+          <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:resourceMaintenance/*/mmi:maintenanceAndUpdateFrequency"/>
+        </section>
+
+        <section name="mwbf-constraints">
+          <!-- TODO: Action with CGU/...-->
+          <field
+            xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:resourceConstraints/mco:MD_LegalConstraints/mco:accessConstraints"/>
+          <field
+            xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:resourceConstraints/mco:MD_LegalConstraints/mco:useConstraints"/>
+          <field
+            xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:resourceConstraints/mco:MD_LegalConstraints/mco:otherConstraints"/>
+        </section>
+
+        <section name="mwbf-access-contact">
+          <field xpath="/mdb:MD_Metadata/mdb:distributionInfo/mrd:MD_Distribution/mrd:distributor"
+                 or="distributor"
+                 in="/mdb:MD_Metadata/mdb:distributionInfo/mrd:MD_Distribution"/>
+        </section>
+
+        <section name="mwbf-data-contact">
+          <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:pointOfContact"
+                 in="pointOfContact"
+                 or="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification"/>
+        </section>
+
+        <section name="mwbf-metadata-contact">
+          <field xpath="/mdb:MD_Metadata/mdb:contact"
+                 or="contact"
+                 in="/mdb:MD_Metadata"/>
+
+          <!-- TODO: Add a suggestion for this !!-->
+          <action type="add"
+                  btnLabel="iamthecontact"/>
+        </section>
+      </tab>
     </view>
 
     <view name="metawal" upAndDownControlHidden="true">
@@ -497,7 +585,8 @@
           <!-- One field and a collection of 3 actions to define
           the current record as a dataset, a serie or a service. -->
           <section name="metadataScopetitle">
-            <field name="metadataScopetitle" xpath="/mdb:MD_Metadata/mdb:metadataScope/mdb:MD_MetadataScope/mdb:resourceScope"/>
+            <field name="metadataScopetitle"
+                   xpath="/mdb:MD_Metadata/mdb:metadataScope/mdb:MD_MetadataScope/mdb:resourceScope"/>
 
             <!-- If resource scope is not define, propose to choose a type.
             This depends on the type of records. Actions for services are
@@ -518,8 +607,9 @@
                   <mdb:metadataScope>
                     <mdb:MD_MetadataScope>
                       <mdb:resourceScope>
-                        <mcc:MD_ScopeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"
-                                          codeListValue="dataset"/>
+                        <mcc:MD_ScopeCode
+                          codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"
+                          codeListValue="dataset"/>
                       </mdb:resourceScope>
                     </mdb:MD_MetadataScope>
                   </mdb:metadataScope>
@@ -538,8 +628,9 @@
                   <mdb:metadataScope>
                     <mdb:MD_MetadataScope>
                       <mdb:resourceScope>
-                        <mcc:MD_ScopeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"
-                                          codeListValue="series"/>
+                        <mcc:MD_ScopeCode
+                          codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"
+                          codeListValue="series"/>
                       </mdb:resourceScope>
                     </mdb:MD_MetadataScope>
                   </mdb:metadataScope>
@@ -558,8 +649,9 @@
                   <mdb:metadataScope>
                     <mdb:MD_MetadataScope>
                       <mdb:resourceScope>
-                        <mcc:MD_ScopeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"
-                                          codeListValue="document"/>
+                        <mcc:MD_ScopeCode
+                          codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"
+                          codeListValue="document"/>
                       </mdb:resourceScope>
                       <mdb:name>
                         <gco:CharacterString>Carte statique</gco:CharacterString>
@@ -582,8 +674,9 @@
                   <mdb:metadataScope>
                     <mdb:MD_MetadataScope>
                       <mdb:resourceScope>
-                        <mcc:MD_ScopeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"
-                                          codeListValue="document"/>
+                        <mcc:MD_ScopeCode
+                          codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"
+                          codeListValue="document"/>
                       </mdb:resourceScope>
                       <mdb:name>
                         <gco:CharacterString>Carte dynamique</gco:CharacterString>
@@ -606,8 +699,9 @@
                   <mdb:metadataScope>
                     <mdb:MD_MetadataScope>
                       <mdb:resourceScope>
-                        <mcc:MD_ScopeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"
-                                          codeListValue="nonGeographicDataset"/>
+                        <mcc:MD_ScopeCode
+                          codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"
+                          codeListValue="nonGeographicDataset"/>
                       </mdb:resourceScope>
                     </mdb:MD_MetadataScope>
                   </mdb:metadataScope>
@@ -628,8 +722,9 @@
                   <mdb:metadataScope>
                     <mdb:MD_MetadataScope>
                       <mdb:resourceScope>
-                        <mcc:MD_ScopeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"
-                                          codeListValue="service"/>
+                        <mcc:MD_ScopeCode
+                          codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"
+                          codeListValue="service"/>
                       </mdb:resourceScope>
                     </mdb:MD_MetadataScope>
                   </mdb:metadataScope>
@@ -648,8 +743,9 @@
                   <mdb:metadataScope>
                     <mdb:MD_MetadataScope>
                       <mdb:resourceScope>
-                        <mcc:MD_ScopeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"
-                                          codeListValue="application"/>
+                        <mcc:MD_ScopeCode
+                          codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"
+                          codeListValue="application"/>
                       </mdb:resourceScope>
                     </mdb:MD_MetadataScope>
                   </mdb:metadataScope>
@@ -769,8 +865,9 @@
                   <mri:descriptiveKeywords>
                     <mri:MD_Keywords>
                       <mri:type>
-                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode"
-                                                codeListValue="theme"/>
+                        <mri:MD_KeywordTypeCode
+                          codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode"
+                          codeListValue="theme"/>
                       </mri:type>
                       <mri:thesaurusName>
                         <cit:CI_Citation>
@@ -783,15 +880,19 @@
                                 <gco:Date>2012-06-19</gco:Date>
                               </cit:date>
                               <cit:dateType>
-                                <cit:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
-                                                     codeListValue="publication"/>
+                                <cit:CI_DateTypeCode
+                                  codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+                                  codeListValue="publication"/>
                               </cit:dateType>
                             </cit:CI_Date>
                           </cit:date>
                           <cit:identifier>
                             <mcc:MD_Identifier>
                               <mcc:code>
-                                <gcx:Anchor xlink:href="http://metawal.wallonie.be/geonetwork/srv/fre/thesaurus.download?ref=external.theme.Themes_geoportail_wallon">geonetwork.thesaurus.external.theme.themes_geoportail_wallon</gcx:Anchor>
+                                <gcx:Anchor
+                                  xlink:href="http://metawal.wallonie.be/geonetwork/srv/fre/thesaurus.download?ref=external.theme.Themes_geoportail_wallon">
+                                  geonetwork.thesaurus.external.theme.themes_geoportail_wallon
+                                </gcx:Anchor>
                               </mcc:code>
                             </mcc:MD_Identifier>
                           </cit:identifier>
@@ -815,7 +916,6 @@
                                      'Thèmes du géoportail wallon')]) > 0"/>
 
 
-
             <!-- All other keywords -->
             <action type="add"
                     name="mw-ed-inspireTheme"
@@ -830,8 +930,9 @@
                   <mri:descriptiveKeywords>
                     <mri:MD_Keywords>
                       <mri:type>
-                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode"
-                                                codeListValue="theme"/>
+                        <mri:MD_KeywordTypeCode
+                          codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode"
+                          codeListValue="theme"/>
                       </mri:type>
                       <mri:thesaurusName>
                         <cit:CI_Citation>
@@ -844,14 +945,19 @@
                                 <gco:Date>2008-06-01</gco:Date>
                               </cit:date>
                               <cit:dateType>
-                                <cit:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication"/>
+                                <cit:CI_DateTypeCode
+                                  codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+                                  codeListValue="publication"/>
                               </cit:dateType>
                             </cit:CI_Date>
                           </cit:date>
                           <cit:identifier>
                             <mcc:MD_Identifier>
                               <mcc:code>
-                                <gcx:Anchor xlink:href="http://metawal.wallonie.be/geonetwork/srv/eng/thesaurus.download?ref=external.theme.inspire-theme">geonetwork.thesaurus.external.theme.inspire-theme</gcx:Anchor>
+                                <gcx:Anchor
+                                  xlink:href="http://metawal.wallonie.be/geonetwork/srv/eng/thesaurus.download?ref=external.theme.inspire-theme">
+                                  geonetwork.thesaurus.external.theme.inspire-theme
+                                </gcx:Anchor>
                               </mcc:code>
                             </mcc:MD_Identifier>
                           </cit:identifier>
@@ -883,8 +989,9 @@
                   <mri:descriptiveKeywords>
                     <mri:MD_Keywords>
                       <mri:type>
-                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode"
-                                                codeListValue="theme"/>
+                        <mri:MD_KeywordTypeCode
+                          codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode"
+                          codeListValue="theme"/>
                       </mri:type>
                       <mri:thesaurusName>
                         <cit:CI_Citation>
@@ -897,15 +1004,19 @@
                                 <gco:Date>2012-07-20</gco:Date>
                               </cit:date>
                               <cit:dateType>
-                                <cit:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
-                                                     codeListValue="publication"/>
+                                <cit:CI_DateTypeCode
+                                  codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+                                  codeListValue="publication"/>
                               </cit:dateType>
                             </cit:CI_Date>
                           </cit:date>
                           <cit:identifier>
                             <mcc:MD_Identifier>
                               <mcc:code>
-                                <gcx:Anchor xlink:href="http://metawal.wallonie.be/geonetwork/srv/fre/thesaurus.download?ref=external.theme.gemet">geonetwork.thesaurus.external.theme.gemet</gcx:Anchor>
+                                <gcx:Anchor
+                                  xlink:href="http://metawal.wallonie.be/geonetwork/srv/fre/thesaurus.download?ref=external.theme.gemet">
+                                  geonetwork.thesaurus.external.theme.gemet
+                                </gcx:Anchor>
                               </mcc:code>
                             </mcc:MD_Identifier>
                           </cit:identifier>
@@ -925,7 +1036,8 @@
           </section>
 
           <section name="otherKeywords">
-            <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:descriptiveKeywords[not(*/mri:thesaurusName)]/*/mri:keyword"/>
+            <field
+              xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:descriptiveKeywords[not(*/mri:thesaurusName)]/*/mri:keyword"/>
 
             <action type="add"
                     btnLabel="addOtherKeyword"
@@ -960,7 +1072,8 @@
         </section>
 
         <section>
-          <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:extent/*/gex:geographicElement/gex:EX_GeographicBoundingBox"/>
+          <field
+            xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:extent/*/gex:geographicElement/gex:EX_GeographicBoundingBox"/>
         </section>
 
         <section name="metawalTemporalCoverage">
@@ -1071,7 +1184,6 @@
           </action>
 
 
-
           <field xpath="/mdb:MD_Metadata/mdb:dataQualityInfo/*/mdq:report[mdq:DQ_AbsoluteExternalPositionalAccuracy]"/>
 
           <action type="add"
@@ -1093,7 +1205,8 @@
                     <mdq:result>
                       <mdq:DQ_QuantitativeResult>
                         <mdq:value>
-                          <gco:Record>X m en planimétrie et Z m en altimétrie pour les éléments bien identifiables</gco:Record>
+                          <gco:Record>X m en planimétrie et Z m en altimétrie pour les éléments bien identifiables
+                          </gco:Record>
                         </mdq:value>
                         <mdq:valueUnit>
                           <gml:BaseUnit xmlns="http://www.opengis.net/gml/3.2" gml:id="meters">
@@ -1113,9 +1226,10 @@
 
         <section name="metawalUpdate">
           <!-- TODO: del does not remove the parent element -->
-          <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:resourceMaintenance/mmi:MD_MaintenanceInformation/mmi:maintenanceAndUpdateFrequency"
-                 or="maintenanceAndUpdateFrequency"
-                 in="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:resourceMaintenance/*"/>
+          <field
+            xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:resourceMaintenance/mmi:MD_MaintenanceInformation/mmi:maintenanceAndUpdateFrequency"
+            or="maintenanceAndUpdateFrequency"
+            in="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:resourceMaintenance/*"/>
 
           <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:resourceMaintenance/*/mmi:maintenanceNote"/>
 
@@ -1129,8 +1243,9 @@
                 <mri:resourceMaintenance>
                   <mmi:MD_MaintenanceInformation>
                     <mmi:maintenanceAndUpdateFrequency>
-                      <mmi:MD_MaintenanceFrequencyCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_MaintenanceFrequencyCode"
-                                                       codeListValue=""/>
+                      <mmi:MD_MaintenanceFrequencyCode
+                        codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_MaintenanceFrequencyCode"
+                        codeListValue=""/>
                     </mmi:maintenanceAndUpdateFrequency>
                     <mmi:maintenanceNote gco:nilReason="missing">
                       <gco:CharacterString/>
@@ -1218,7 +1333,6 @@
           </action>
 
 
-
           <field xpath="/mdb:MD_Metadata/mdb:referenceSystemInfo"
                  or="referenceSystemInfo"
                  in="/mdb:MD_Metadata"/>
@@ -1299,9 +1413,12 @@
         </section>
 
         <section name="constraints">
-          <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:resourceConstraints/mco:MD_LegalConstraints/mco:accessConstraints"/>
-          <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:resourceConstraints/mco:MD_LegalConstraints/mco:useConstraints"/>
-          <field xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:resourceConstraints/mco:MD_LegalConstraints/mco:otherConstraints"/>
+          <field
+            xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:resourceConstraints/mco:MD_LegalConstraints/mco:accessConstraints"/>
+          <field
+            xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:resourceConstraints/mco:MD_LegalConstraints/mco:useConstraints"/>
+          <field
+            xpath="/mdb:MD_Metadata/mdb:identificationInfo/*/mri:resourceConstraints/mco:MD_LegalConstraints/mco:otherConstraints"/>
 
 
           <!-- TODO: Probably provide a add action to add a default value if none defined. -->
@@ -1310,8 +1427,10 @@
         <section name="mw-data-online-access">
           <text ref="mw-data-online-access-help"/>
 
-          <field xpath="/mdb:MD_Metadata/mdb:distributionInfo/mrd:MD_Distribution/mrd:distributionFormat/mrd:MD_Format/mrd:formatDistributor/mrd:MD_Distributor/mrd:distributionOrderProcess" or="distributionOrderProcess"
-                 in="/mdb:MD_Metadata/mdb:distributionInfo/mrd:MD_Distribution/mrd:distributionFormat/mrd:MD_Format/mrd:formatDistributor/mrd:MD_Distributor"/>
+          <field
+            xpath="/mdb:MD_Metadata/mdb:distributionInfo/mrd:MD_Distribution/mrd:distributionFormat/mrd:MD_Format/mrd:formatDistributor/mrd:MD_Distributor/mrd:distributionOrderProcess"
+            or="distributionOrderProcess"
+            in="/mdb:MD_Metadata/mdb:distributionInfo/mrd:MD_Distribution/mrd:distributionFormat/mrd:MD_Format/mrd:formatDistributor/mrd:MD_Distributor"/>
 
           <action type="associatedResource"
                   name="linkToService"
@@ -1363,7 +1482,7 @@
             <!-- TODO: That is not enough, a add action needs to be added to provide a default report. -->
             <field xpath="/mdb:MD_Metadata/mdb:dataQualityInfo/*/mdq:report[
                               .//mdq:specification/*/cit:title/gco:CharacterString[contains(text(), '1089/2010')]
-                              ]" />
+                              ]"/>
 
             <action type="add"
                     btnLabel="isINSPIREConform"
@@ -1382,7 +1501,11 @@
                           <mdq:specification>
                             <cit:CI_Citation>
                               <cit:title>
-                                <gco:CharacterString>RÈGLEMENT (UE) N o 1089/2010 DE LA COMMISSION du 23 novembre 2010 portant modalités d'application de la directive 2007/2/CE du Parlement européen et du Conseil en ce qui concerne l'interopérabilité des séries et des services de données géographiques</gco:CharacterString>
+                                <gco:CharacterString>RÈGLEMENT (UE) N o 1089/2010 DE LA COMMISSION du 23 novembre 2010
+                                  portant modalités d'application de la directive 2007/2/CE du Parlement européen et du
+                                  Conseil en ce qui concerne l'interopérabilité des séries et des services de données
+                                  géographiques
+                                </gco:CharacterString>
                               </cit:title>
                             </cit:CI_Citation>
                           </mdq:specification>
@@ -1417,7 +1540,11 @@
                           <mdq:specification>
                             <cit:CI_Citation>
                               <cit:title>
-                                <gco:CharacterString>RÈGLEMENT (UE) N o 1089/2010 DE LA COMMISSION du 23 novembre 2010 portant modalités d'application de la directive 2007/2/CE du Parlement européen et du Conseil en ce qui concerne l'interopérabilité des séries et des services de données géographiques</gco:CharacterString>
+                                <gco:CharacterString>RÈGLEMENT (UE) N o 1089/2010 DE LA COMMISSION du 23 novembre 2010
+                                  portant modalités d'application de la directive 2007/2/CE du Parlement européen et du
+                                  Conseil en ce qui concerne l'interopérabilité des séries et des services de données
+                                  géographiques
+                                </gco:CharacterString>
                               </cit:title>
                             </cit:CI_Citation>
                           </mdq:specification>
@@ -1449,9 +1576,12 @@
         <for name="mcc:processor"/>
       </flatModeExceptions>
       <thesaurusList>
-        <thesaurus key="external.theme.httpinspireeceuropaeutheme-theme" transformations="to-iso19115-3.2018-keyword-with-anchor"/>
-        <thesaurus key="external.theme.httpinspireeceuropaeumetadatacodelistSpatialScope-SpatialScope" transformations="to-iso19115-3.2018-keyword-with-anchor"/>
-        <thesaurus key="external.theme.httpinspireeceuropaeumetadatacodelistPriorityDataset-PriorityDataset" transformations="to-iso19115-3.2018-keyword-with-anchor"/>
+        <thesaurus key="external.theme.httpinspireeceuropaeutheme-theme"
+                   transformations="to-iso19115-3.2018-keyword-with-anchor"/>
+        <thesaurus key="external.theme.httpinspireeceuropaeumetadatacodelistSpatialScope-SpatialScope"
+                   transformations="to-iso19115-3.2018-keyword-with-anchor"/>
+        <thesaurus key="external.theme.httpinspireeceuropaeumetadatacodelistPriorityDataset-PriorityDataset"
+                   transformations="to-iso19115-3.2018-keyword-with-anchor"/>
         <thesaurus key="external.theme.gemet" transformations="to-iso19115-3-keyword"/>
         <thesaurus key="external.theme.infraSIG" transformations="to-iso19115-3-keyword"/>
         <thesaurus key="external.theme.themes_geoportail_wallon" transformations="to-iso19115-3-keyword"/>
@@ -1555,9 +1685,12 @@
       </tab>
 
       <thesaurusList>
-        <thesaurus key="external.theme.httpinspireeceuropaeutheme-theme" transformations="to-iso19115-3.2018-keyword-with-anchor"/>
-        <thesaurus key="external.theme.httpinspireeceuropaeumetadatacodelistSpatialScope-SpatialScope" transformations="to-iso19115-3.2018-keyword-with-anchor"/>
-        <thesaurus key="external.theme.httpinspireeceuropaeumetadatacodelistPriorityDataset-PriorityDataset" transformations="to-iso19115-3.2018-keyword-with-anchor"/>
+        <thesaurus key="external.theme.httpinspireeceuropaeutheme-theme"
+                   transformations="to-iso19115-3.2018-keyword-with-anchor"/>
+        <thesaurus key="external.theme.httpinspireeceuropaeumetadatacodelistSpatialScope-SpatialScope"
+                   transformations="to-iso19115-3.2018-keyword-with-anchor"/>
+        <thesaurus key="external.theme.httpinspireeceuropaeumetadatacodelistPriorityDataset-PriorityDataset"
+                   transformations="to-iso19115-3.2018-keyword-with-anchor"/>
         <thesaurus key="external.theme.gemet" transformations="to-iso19115-3-keyword"/>
         <thesaurus key="external.theme.infraSIG" transformations="to-iso19115-3-keyword"/>
         <thesaurus key="external.theme.themes_geoportail_wallon" transformations="to-iso19115-3-keyword"/>
@@ -1587,7 +1720,8 @@
              xpath="mdb:identificationInfo/*/
                       mri:citation/*/cit:title"
              indexField="title">
-        <template><![CDATA[<gco:CharacterString xmlns:gco='http://standards.iso.org/iso/19115/-3/gco/1.0'>{{value}}</gco:CharacterString>]]></template>
+        <template>
+          <![CDATA[<gco:CharacterString xmlns:gco='http://standards.iso.org/iso/19115/-3/gco/1.0'>{{value}}</gco:CharacterString>]]></template>
       </field>
 
       <!-- Insert a new keyword in the first gmd:descriptiveKeywords found.
@@ -1600,7 +1734,8 @@
                       mri:descriptiveKeywords/*/mri:keyword"
              indexField="keyword"
              insertMode="gn_create">
-        <template><![CDATA[<gco:CharacterString xmlns:gco='http://standards.iso.org/iso/19115/-3/gco/1.0'>{{value}}</gco:CharacterString>]]></template>
+        <template>
+          <![CDATA[<gco:CharacterString xmlns:gco='http://standards.iso.org/iso/19115/-3/gco/1.0'>{{value}}</gco:CharacterString>]]></template>
       </field>
 
       <!-- Insert a new topic category
@@ -1613,7 +1748,8 @@
              codelist="mri:MD_TopicCategoryCode"
              indexField="topicCat"
              insertMode="gn_create">
-        <template><![CDATA[<mri:MD_TopicCategoryCode xmlns:mri='http://standards.iso.org/iso/19115/-3/mri/1.0'>{{value}}</mri:MD_TopicCategoryCode>]]></template>
+        <template>
+          <![CDATA[<mri:MD_TopicCategoryCode xmlns:mri='http://standards.iso.org/iso/19115/-3/mri/1.0'>{{value}}</mri:MD_TopicCategoryCode>]]></template>
       </field>
 
       <!-- Insert a new extent
@@ -1632,7 +1768,8 @@
              use="data-gn-language-picker"
              insertMode="gn_replace"
              removable="true">
-        <template><![CDATA[<lan:LanguageCode xmlns:lan='http://standards.iso.org/iso/19115/-3/lan/1.0' codeListValue='{{value}}'/>]]></template>
+        <template>
+          <![CDATA[<lan:LanguageCode xmlns:lan='http://standards.iso.org/iso/19115/-3/lan/1.0' codeListValue='{{value}}'/>]]></template>
       </field>
 
 
@@ -1643,7 +1780,8 @@
              codelist="mcc:MD_ProgressCode"
              insertMode="gn_replace"
              removable="true">
-        <template><![CDATA[<mcc:MD_ProgressCode xmlns:mcc='http://standards.iso.org/iso/19115/-3/mcc/1.0' codeListValue='{{value}}'/>]]></template>
+        <template>
+          <![CDATA[<mcc:MD_ProgressCode xmlns:mcc='http://standards.iso.org/iso/19115/-3/mcc/1.0' codeListValue='{{value}}'/>]]></template>
       </field>
     </section>
 
@@ -1659,7 +1797,8 @@
              codelist="mco:MD_RestrictionCode"
              insertMode="gn_create"
              removable="true">
-        <template><![CDATA[<mco:MD_RestrictionCode xmlns:mco='http://standards.iso.org/iso/19115/-3/mco/1.0' codeListValue='{{value}}'/>]]></template>
+        <template>
+          <![CDATA[<mco:MD_RestrictionCode xmlns:mco='http://standards.iso.org/iso/19115/-3/mco/1.0' codeListValue='{{value}}'/>]]></template>
       </field>
 
       <!-- Insert a new other contraints
@@ -1672,7 +1811,8 @@
              use="textarea"
              insertMode="gn_create"
              removable="true">
-        <template><![CDATA[<gco:CharacterString xmlns:gco='http://standards.iso.org/iso/19115/-3/gco/1.0'>{{value}}</gco:CharacterString>]]></template>
+        <template>
+          <![CDATA[<gco:CharacterString xmlns:gco='http://standards.iso.org/iso/19115/-3/gco/1.0'>{{value}}</gco:CharacterString>]]></template>
       </field>
     </section>
 
@@ -1686,7 +1826,8 @@
              use="textarea"
              insertMode="gn_replace"
              removable="true">
-        <template><![CDATA[<gco:CharacterString xmlns:gco='http://standards.iso.org/iso/19115/-3/gco/1.0'>{{value}}</gco:CharacterString>]]></template>
+        <template>
+          <![CDATA[<gco:CharacterString xmlns:gco='http://standards.iso.org/iso/19115/-3/gco/1.0'>{{value}}</gco:CharacterString>]]></template>
       </field>
     </section>
 
@@ -1710,7 +1851,8 @@
              xpath="mdb:defaultLocale/lan:PT_Locale/lan:language"
              use="data-gn-language-picker"
              removable="true">
-        <template><![CDATA[<lan:LanguageCode xmlns:lan='http://standards.iso.org/iso/19115/-3/lan/1.0' codeListValue='{{value}}'/>]]></template>
+        <template>
+          <![CDATA[<lan:LanguageCode xmlns:lan='http://standards.iso.org/iso/19115/-3/lan/1.0' codeListValue='{{value}}'/>]]></template>
       </field>
     </section>
   </batchEditing>

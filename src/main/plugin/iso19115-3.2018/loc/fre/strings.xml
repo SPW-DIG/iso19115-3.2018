@@ -67,6 +67,60 @@
     ajoute les emprises correspondantes.
   </add-extent-from-geokeywordsHelp>
 
+  <!-- METAWAL basic form-->
+  <metawalbasicform>MW formulaire basique</metawalbasicform>
+  <mwbf-mainInfo>Information</mwbf-mainInfo>
+  <mwbf-title>Titre</mwbf-title>
+  <mwbf-representationType>Type de représentation spatiale</mwbf-representationType>
+  <mwbf-abstract>Résumé</mwbf-abstract>
+  <mwbf-lineage>Généalogie</mwbf-lineage>
+  <mwbf-keywords>Mots clés</mwbf-keywords>
+  <mwbf-dateinfo>Mise à jour et maintenance</mwbf-dateinfo>
+  <mwbf-constraints>Contraintes</mwbf-constraints>
+  <mwbf-access-contact>Contact relatif à la distribution</mwbf-access-contact>
+  <mwbf-data-contact>Contact relatif à la ressource</mwbf-data-contact>
+  <mwbf-metadata-contact>Contact relatif à la métadonnée</mwbf-metadata-contact>
+  <mwbf-sidepanelhelp>
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-10">
+        <div class="alert alert-info">
+          Introduire les bonnes pratiques pour remplir le champs de la métadonnée lié aux ressources en ligne associées
+        </div>
+      </div>
+    </div>
+  </mwbf-sidepanelhelp>
+  <mwbf-abstracthelp>
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-10">
+        <div class="alert alert-info">
+          Introduire les bonnes pratiques pour remplir le champs de la métadonnée liéessourc à l'accroche et au résumé
+        </div>
+      </div>
+    </div>
+  </mwbf-abstracthelp>
+  <mwbf-lineagehelp>
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-10">
+        <div class="alert alert-info">
+          Introduire les bonnes pratiques pour remplir le champs de la métadonnée lié à la généalogie
+        </div>
+      </div>
+    </div>
+  </mwbf-lineagehelp>
+  <mwbf-keywordhelp>
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-10">
+        <div class="alert alert-info">
+          Introduire les bonnes pratiques pour remplir le champs de la métadonnée lié aux mots clés
+        </div>
+      </div>
+    </div>
+  </mwbf-keywordhelp>
+
   <!-- METAWAL View and tabs for GeoPortail view-->
   <metawal>Geoportail</metawal>
   <metawal-help>La vue Géoportail présente les informations qui seront affichés dans Metawal et dans le Géoportail.</metawal-help>
