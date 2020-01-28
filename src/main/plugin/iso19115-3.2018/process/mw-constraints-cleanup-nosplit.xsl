@@ -164,6 +164,12 @@ WHERE data LIKE '%Reporting INSPIRE<%'
                 </mco:useConstraints>
 
                 <mco:otherConstraints>
+
+                  <!--<xsl:message>
+                    D<xsl:value-of select="$isRestrictedD1"/>
+                    A<xsl:value-of select="$isRestrictedA1"/>
+                    C<xsl:value-of select="$isRestrictedCPUC"/>
+                  </xsl:message>-->
                   <xsl:choose>
                     <xsl:when test="$isRestrictedA1">
                       <gco:CharacterString>ACCÈS : Les conditions générales d'accès s’appliquent (https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGA.pdf) mais sont restreintes par les conditions particulières de type A1 (https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CPA-TypeA1.pdf).

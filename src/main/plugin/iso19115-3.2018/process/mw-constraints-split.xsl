@@ -33,28 +33,6 @@
   <xsl:variable name="isRestrictedCPUA"
                 select="count(//mco:otherConstraints/*[contains(., 'DataSPW-CPU-TypeA')]) > 0"/>
 
-
-  <!-- Add helpdesk email to SPW Org when not set. -->
-  <xsl:template match="cit:CI_Organisation[
-                              cit:name/*/text() = 'Service public de Wallonie (SPW)'
-                              and normalize-space(cit:contactInfo/*/cit:address/*/cit:electronicMailAddress) = '']/cit:contactInfo/*">
-    <xsl:copy>
-      <xsl:apply-templates select="@*"/>
-      <xsl:apply-templates select="cit:phone"/>
-
-      <cit:address>
-        <cit:CI_Address>
-          <xsl:apply-templates select="cit:address/*/(cit:deliveryPoint|cit:city|cit:administrativeArea|cit:postalCode|cit:country)"/>
-          <cit:electronicMailAddress>
-            <gco:CharacterString>helpdesk.carto@spw.wallonie.be</gco:CharacterString>
-          </cit:electronicMailAddress>
-        </cit:CI_Address>
-      </cit:address>
-
-      <xsl:apply-templates select="cit:onlineResource|cit:hoursOfService|cit:contactInstructions|cit:contactType"/>
-    </xsl:copy>
-  </xsl:template>
-
   <!--
   We suppose we always have a resourceConstraints.
   We remove all.
@@ -82,20 +60,27 @@ select ARRAY[ARRAY['xlink', 'http://www.w3.org/1999/xlink'],
 )
 
 SELECT distinct(unnest(xpath('//mdb:identificationInfo/*/mri:citation/*/cit:title/*/text()',
- XMLPARSE(DOCUMENT data), n)))::text  AS node,
+ XMLPARSE(DOCUMENT data), n)))::text  AS title,
+ unnest(xpath('count(//mri:keyword[gco:CharacterString = ''Reporting INSPIRE'']) > 0',
+ XMLPARSE(DOCUMENT data), n))::text  AS isInspire, isTemplate,
  unnest(xpath('//mco:uselimitation/*/text()',
  XMLPARSE(DOCUMENT data), n))::text  AS uselimitation,
  unnest(xpath('//mco:otherConstraints/*/text()',
  XMLPARSE(DOCUMENT data), n))::text  AS otherConstraints,
  unnest(xpath('count(//mco:otherConstraints/*[contains(text(), ''DataSPW-CPA-TypeA1'')]) > 0',
- XMLPARSE(DOCUMENT data), n))::text  AS A1,
+ XMLPARSE(DOCUMENT data), n))::text  AS CPATypeA1,
  unnest(xpath('count(//mco:otherConstraints/*[contains(text(), ''DataSPW-CPA-TypeD1'')]) > 0',
- XMLPARSE(DOCUMENT data), n))::text  AS D1,
+ XMLPARSE(DOCUMENT data), n))::text  AS CPATypeD1,
+ unnest(xpath('count(//mco:otherConstraints/*[contains(text(), ''DataSPW-CPU-TypeC'')]) > 0',
+ XMLPARSE(DOCUMENT data), n))::text  AS CPUTypeC,
+ unnest(xpath('count(//mco:otherConstraints/*[contains(text(), ''DataSPW-CPU-TypeA'')]) > 0',
+ XMLPARSE(DOCUMENT data), n))::text  AS CPUTypeA,
  unnest(xpath('count(//mri:resourceConstraints)',
  XMLPARSE(DOCUMENT data), n))::text  AS nbRC
 FROM metadata, ns
-WHERE data LIKE '%%'
-WHERE data LIKE '%Reporting INSPIRE<%'
+WHERE data LIKE '%%' AND isHarvested = 'n'
+ORDER BY isInspire, title;
+
      -->
     <xsl:choose>
       <xsl:when test="$isInspireRecord">
@@ -127,9 +112,7 @@ WHERE data LIKE '%Reporting INSPIRE<%'
               </mco:useLimitation>
               <mco:otherConstraints>
                 <gcx:Anchor
-                  xlink:href="https://geoportail.wallonie.be/files/documents/ConditionsSPW/LicServicesSPW.pdf">Les
-                  conditions d'utilisation du service sont régies par les Conditions d’accès et d’utilisation des
-                  services web géographiques de visualisation du Service public de Wallonie.
+                  xlink:href="https://geoportail.wallonie.be/files/documents/ConditionsSPW/LicServicesSPW.pdf">Les conditions d'utilisation du service sont régies par les Conditions d’accès et d’utilisation des services web géographiques de visualisation du Service public de Wallonie.
                 </gcx:Anchor>
               </mco:otherConstraints>
             </mri:resourceConstraints>
@@ -164,13 +147,13 @@ WHERE data LIKE '%Reporting INSPIRE<%'
                 </mco:useConstraints>
 
                 <mco:otherConstraints>
-                  <gcx:Anchor xlink:href="http://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGU.pdf">
+                  <gcx:Anchor xlink:href="https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGU.pdf">
                     Les conditions générales d'utilisation s'appliquent.
                   </gcx:Anchor>
                 </mco:otherConstraints>
 
                 <mco:otherConstraints>
-                  <gcx:Anchor xlink:href="http://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGA.pdf">
+                  <gcx:Anchor xlink:href="https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGA.pdf">
                     Les conditions générales d'accès s’appliquent.
                   </gcx:Anchor>
                 </mco:otherConstraints>
