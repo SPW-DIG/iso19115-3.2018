@@ -473,7 +473,6 @@
                    transformations="to-iso19115-3.2018-keyword-with-anchor"/>
         <thesaurus key="external.theme.gemet" transformations="to-iso19115-3-keyword"/>
         <thesaurus key="external.theme.infraSIG" transformations="to-iso19115-3-keyword"/>
-        <thesaurus key="external.theme.themes_geoportail_wallon" transformations="to-iso19115-3-keyword"/>
         <thesaurus key="external.theme.Themes_geoportail_wallon" transformations="to-iso19115-3-keyword"/>
       </thesaurusList>
     </view>
@@ -1821,7 +1820,7 @@
                  in="/mdb:MD_Metadata"/>
       </tab>
       <tab id="metadata">
-        <section name="mdb:MD_Metadata">
+        <section name="metadata">
           <field xpath="/mdb:MD_Metadata/mdb:metadataIdentifier"/>
           <field xpath="/mdb:MD_Metadata/mdb:defaultLocale" or="defaultLocale"
                  in="/mdb:MD_Metadata"/>
@@ -1869,7 +1868,6 @@
                    transformations="to-iso19115-3.2018-keyword-with-anchor"/>
         <thesaurus key="external.theme.gemet" transformations="to-iso19115-3-keyword"/>
         <thesaurus key="external.theme.infraSIG" transformations="to-iso19115-3-keyword"/>
-        <thesaurus key="external.theme.themes_geoportail_wallon" transformations="to-iso19115-3-keyword"/>
         <thesaurus key="external.theme.Themes_geoportail_wallon" transformations="to-iso19115-3-keyword"/>
       </thesaurusList>
     </view>
