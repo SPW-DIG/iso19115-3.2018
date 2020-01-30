@@ -1500,10 +1500,7 @@
                           <mdq:specification>
                             <cit:CI_Citation>
                               <cit:title>
-                                <gco:CharacterString>RÈGLEMENT (UE) N o 1089/2010 DE LA COMMISSION du 23 novembre 2010
-                                  portant modalités d'application de la directive 2007/2/CE du Parlement européen et du
-                                  Conseil en ce qui concerne l'interopérabilité des séries et des services de données
-                                  géographiques
+                                <gco:CharacterString>RÈGLEMENT (UE) N o 1089/2010 DE LA COMMISSION du 23 novembre 2010 portant modalités d'application de la directive 2007/2/CE du Parlement européen et du Conseil en ce qui concerne l'interopérabilité des séries et des services de données géographiques
                                 </gco:CharacterString>
                               </cit:title>
                             </cit:CI_Citation>
@@ -1539,11 +1536,7 @@
                           <mdq:specification>
                             <cit:CI_Citation>
                               <cit:title>
-                                <gco:CharacterString>RÈGLEMENT (UE) N o 1089/2010 DE LA COMMISSION du 23 novembre 2010
-                                  portant modalités d'application de la directive 2007/2/CE du Parlement européen et du
-                                  Conseil en ce qui concerne l'interopérabilité des séries et des services de données
-                                  géographiques
-                                </gco:CharacterString>
+                                <gco:CharacterString>RÈGLEMENT (UE) N o 1089/2010 DE LA COMMISSION du 23 novembre 2010 portant modalités d'application de la directive 2007/2/CE du Parlement européen et du Conseil en ce qui concerne l'interopérabilité des séries et des services de données géographiques</gco:CharacterString>
                               </cit:title>
                             </cit:CI_Citation>
                           </mdq:specification>
@@ -1720,6 +1713,1254 @@
                         </mdq:explanation>
                         <mdq:pass>
                           <gco:Boolean>false</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+            </template>
+          </action>
+
+
+          <action type="add"
+                  btnLabel="inspireNetworkService"
+                  or="report"
+                  in="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality"
+                  if="count(mdb:MD_Metadata/*/srv:SV_ServiceIdentification) > 0 and count(mdb:MD_Metadata/mdb:dataQualityInfo//mdq:DQ_DomainConsistency[
+                                .//mdq:specification/*/cit:title/*[contains(text(), '976/2009')]
+                                ]) = 0">
+            <template>
+              <snippet label="notEvaluated">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification xlink:href="http://inspire.ec.europa.eu/id/citation/ir/reg-976-2009">
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gcx:Anchor xlink:href="http://data.europa.eu/eli/reg/2009/976">Règlement (CE) n o 976/2009 de la Commission du 19 octobre 2009 portant modalités d’application de la directive 2007/2/CE du Parlement européen et du Conseil en ce qui concerne les services en réseau</gcx:Anchor>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2009-10-19</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode"
+                                                       codeListValue="publication"/>
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass gco:nilReason="unknown"/>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+
+              <snippet label="conformant">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification xlink:href="http://inspire.ec.europa.eu/id/citation/ir/reg-976-2009">
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gcx:Anchor xlink:href="http://data.europa.eu/eli/reg/2009/976">Règlement (CE) n o 976/2009 de la Commission du 19 octobre 2009 portant modalités d’application de la directive 2007/2/CE du Parlement européen et du Conseil en ce qui concerne les services en réseau</gcx:Anchor>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2009-10-19</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode"
+                                                       codeListValue="publication"/>
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+
+              <snippet label="notConformant">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification xlink:href="http://inspire.ec.europa.eu/id/citation/ir/reg-976-2009">
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gcx:Anchor xlink:href="http://data.europa.eu/eli/reg/2009/976">Règlement (CE) n o 976/2009 de la Commission du 19 octobre 2009 portant modalités d’application de la directive 2007/2/CE du Parlement européen et du Conseil en ce qui concerne les services en réseau</gcx:Anchor>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2009-10-19</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode"
+                                                       codeListValue="publication"/>
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>false</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+            </template>
+          </action>
+
+
+          <action type="add"
+                  btnLabel="inspireDataSpecConformity"
+                  or="report"
+                  in="/mdb:MD_Metadata/mdb:dataQualityInfo/mdq:DQ_DataQuality"
+                  if="count(mdb:MD_Metadata/mdb:dataQualityInfo//mdq:DQ_DomainConsistency[
+                                .//mdq:specification/*/cit:title/*[contains(text(), 'INSPIRE Data Specification')]
+                                ]) = 0">
+            <template>
+              <snippet label="dataSpecAD">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Addresses - Guidelines v 3.1.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2014-04-17</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecAU">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Administrative units - Guidelines v 3.1.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2014-04-17</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecCP">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Cadastral parcels - Guidelines v 3.1.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2014-04-17</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecRS">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Coordinate reference systems - Guidelines v 3.2.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2014-04-17</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecGG">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Geographical grid systems - Guidelines v 3.1.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2014-04-17</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecAU">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Administrative units - Guidelines v 3.1.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2014-04-17</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecGN">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Geographical names - Guidelines v 3.1.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2014-04-17</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecHY">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Hydrography - Guidelines v 3.1.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2014-04-17</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecPS">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Protected Sites - Guidelines v 3.2.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2014-04-17</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecTN">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Transport Networks - Guidelines v 3.2.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2014-04-17</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecEL">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Elevation - Guidelines v 3.0.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2013-12-10</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecGE">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Geology - Guidelines v 3.0.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2013-12-10</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecLC">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Land Cover - Guidelines v 3.0.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2013-12-10</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecOI">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Orthoimagery - Guidelines v 3.0.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2013-12-10</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecAF">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Agricultural and Aquaculture Facilities - Guidelines v 3.0.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2013-12-10</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecAM">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Area Management/Restriction/Regulation Zones and Reporting Units - Guidelines v 3.0.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2013-12-10</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecAC">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Atmospheric Conditions and Meteorological Geographical Features - Guidelines v 3.0.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2013-12-10</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecBR">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Bio-geographical Regions - Guidelines v 3.0.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2013-12-10</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecBU">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Buildings - Guidelines v 3.0.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2013-12-10</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecER">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Energy Resources - Guidelines v 3.0.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2013-12-10</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecEF">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Environmental Monitoring Facilities - Guidelines v 3.0.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2013-12-10</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecHB">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Habitats and Biotopes - Guidelines v 3.0.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2013-12-10</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecHH">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Human Health and Safety - Guidelines v 3.0.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2013-12-10</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecLU">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Land Use - Guidelines v 3.0.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2013-12-10</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecMR">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Mineral Resources - Guidelines v 3.0.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2013-12-10</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecNZ">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Natural Risk Zones - Guidelines v 3.0.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2013-12-10</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecOF">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Oceanographic geographical features - Guidelines v 3.0.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2013-12-10</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecPF">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Production and Industrial Facilities - Guidelines v 3.0.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2013-12-10</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecPD">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Population Distribution - Guidelines v 3.0.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2013-12-10</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecSR">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Sea Regions - Guidelines v 3.0.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2013-12-10</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecSO">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Soil - Guidelines v 3.0.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2013-12-10</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecSD">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Species Distribution - Guidelines v 3.0.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2013-12-10</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecSU">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Statistical Units - Guidelines v 3.0.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2013-12-10</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
+                        </mdq:pass>
+                      </mdq:DQ_ConformanceResult>
+                    </mdq:result>
+                  </mdq:DQ_DomainConsistency>
+                </mdq:report>
+              </snippet>
+              <snippet label="dataSpecUS">
+                <mdq:report>
+                  <mdq:DQ_DomainConsistency>
+                    <mdq:result>
+                      <mdq:DQ_ConformanceResult>
+                        <mdq:specification>
+                          <cit:CI_Citation>
+                            <cit:title>
+                              <gco:CharacterString>INSPIRE Data Specification on Utility and Government Services - Guidelines v 3.0.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                              <cit:CI_Date>
+                                <cit:date>
+                                  <gco:Date>2013-12-10</gco:Date>
+                                </cit:date>
+                                <cit:dateType>
+                                  <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                </cit:dateType>
+                              </cit:CI_Date>
+                            </cit:date>
+                          </cit:CI_Citation>
+                        </mdq:specification>
+                        <mdq:explanation>
+                          <gco:CharacterString>Voir la spécification référencée</gco:CharacterString>
+                        </mdq:explanation>
+                        <mdq:pass>
+                          <gco:Boolean>true</gco:Boolean>
                         </mdq:pass>
                       </mdq:DQ_ConformanceResult>
                     </mdq:result>

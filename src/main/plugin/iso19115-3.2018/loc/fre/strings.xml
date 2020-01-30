@@ -380,6 +380,43 @@
   <notEvaluated>Non évalué</notEvaluated>
   <conformant>Conforme</conformant>
   <notConformant>Non conforme</notConformant>
+  <inspireNetworkService>Service en réseau</inspireNetworkService>
+
+  <inspireDataSpecConformity>Conformité des données</inspireDataSpecConformity>
+  <dataSpecAD>Addresses</dataSpecAD>
+  <dataSpecAU>Administrative units</dataSpecAU>
+  <dataSpecCP>Cadastral parcels</dataSpecCP>
+  <dataSpecRS>Coordinate reference systems</dataSpecRS>
+  <dataSpecGG>Geographical grid systems</dataSpecGG>
+  <dataSpecGN>Geographical names</dataSpecGN>
+  <dataSpecHY>Hydrography</dataSpecHY>
+  <dataSpecPS>Protected sites</dataSpecPS>
+  <dataSpecTN>Transport networks</dataSpecTN>
+  <dataSpecEL>Elevation</dataSpecEL>
+  <dataSpecGE>Geology</dataSpecGE>
+  <dataSpecOI>Orthoimagery</dataSpecOI>
+  <dataSpecLC>Land cover</dataSpecLC>
+  <dataSpecAF>Agricultural and aquaculture facilities</dataSpecAF>
+  <dataSpecAM>Area management / restriction / regulation zones &amp; reporting units</dataSpecAM>
+  <dataSpecAC>Atmospheric conditions</dataSpecAC>
+  <dataSpecBR>Bio-geographical regions</dataSpecBR>
+  <dataSpecBU>Buildings</dataSpecBU>
+  <dataSpecER>Energy Resources</dataSpecER>
+  <dataSpecEF>Environmental monitoring Facilities</dataSpecEF>
+  <dataSpecHB>Habitats and biotopes</dataSpecHB>
+  <dataSpecHH>Human health and safety</dataSpecHH>
+  <dataSpecLU>Land use</dataSpecLU>
+  <dataSpecMF>Meteorological geographical features</dataSpecMF>
+  <dataSpecMR>Mineral Resources</dataSpecMR>
+  <dataSpecNZ>Natural risk zones</dataSpecNZ>
+  <dataSpecOF>Oceanographic geographical features</dataSpecOF>
+  <dataSpecPD>Population distribution and demography</dataSpecPD>
+  <dataSpecPF>Production and industrial facilities</dataSpecPF>
+  <dataSpecSR>Sea regions</dataSpecSR>
+  <dataSpecSO>Soil</dataSpecSO>
+  <dataSpecSD>Species distribution</dataSpecSD>
+  <dataSpecSU>Statistical units</dataSpecSU>
+  <dataSpecUS>Utility and governmental services</dataSpecUS>
 
   <addCrs>Projection</addCrs>
   <addCrs31370>Belge 1972 / Belgian Lambert 72 (EPSG:31370)</addCrs31370>
