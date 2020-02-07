@@ -142,7 +142,9 @@ Ce schéma est également composé des normes :
     are filtered when user does not have download
     privilege.-->
     <filter xpath="*//mrd:onLine[*/cit:protocol/gco:CharacterString = 'FILE:RASTER' or
-                                 */cit:protocol/gco:CharacterString = 'DB:ORACLE'"
+                                 */cit:protocol/gco:CharacterString = 'FILE:GEO' or
+                                 */cit:protocol/gco:CharacterString = 'DB:POSTGIS' or
+                                 */cit:protocol/gco:CharacterString = 'DB:ORACLE']"
             ifNotOperation="download"/>
 
     <!--
