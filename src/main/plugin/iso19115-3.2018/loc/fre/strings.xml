@@ -374,6 +374,7 @@
   <serviceView>Consulter le service dans une application</serviceView>
   <noThesaurusName>Mots clés</noThesaurusName>
   <extent>Étendue spatiale</extent>
+  <spatialExtent>Étendue spatiale</spatialExtent>
   <freeTextKeywords>Other keywords</freeTextKeywords>
 
   <inspireConformity>Conformité INSPIRE</inspireConformity>

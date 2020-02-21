@@ -179,13 +179,20 @@
       <h2>
         <i class="fa fa-fw fa-map-marker"><xsl:comment select="'image'"/></i>
         <span><xsl:comment select="name()"/>
-          <xsl:value-of select="$schemaStrings/extent"/>
+          <xsl:value-of select="$schemaStrings/spatialExtent"/>
         </span>
       </h2>
 
-      <xsl:apply-templates mode="render-field"
-                           select=".//gex:EX_GeographicBoundingBox">
-      </xsl:apply-templates>
+      <xsl:choose>
+        <xsl:when test=".//gex:EX_BoundingPolygon">
+          <xsl:copy-of select="gn-fn-render:extent($metadataUuid)"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:apply-templates mode="render-field"
+                               select=".//gex:EX_GeographicBoundingBox">
+          </xsl:apply-templates>
+        </xsl:otherwise>
+      </xsl:choose>
     </section>
   </xsl:template>
 
@@ -233,7 +240,7 @@
     <xsl:if test="$withJsonLd = 'true'">
       <script type="application/ld+json">
         <xsl:apply-templates mode="getJsonLD"
-                             select="$metadata"/>
+                             select="$metadata"/>&#160;
       </script>
     </xsl:if>
   </xsl:template>
@@ -278,17 +285,22 @@
                 <xsl:if test="position() != last()">&#160;-&#160;</xsl:if>
               </xsl:for-each>
 
-              <!-- Publication year -->
-              <xsl:variable name="publicationDate"
-                            select="mdb:identificationInfo/*/mri:citation/*/cit:date/*[
-                                    cit:dateType/*/@codeListValue = 'publication']/
-                                      cit:date/gco:*"/>
-
-              <xsl:if test="$publicationDate != ''">
-                (<xsl:value-of select="substring($publicationDate, 1, 4)"/>)
-              </xsl:if>
-
-              <xsl:text>. </xsl:text>
+              <!-- Publication year: use last publication or revision date -->
+              <xsl:variable name="publicationDate">
+                <xsl:perform-sort select="mdb:identificationInfo/*/mri:citation/*/cit:date/*[
+                                    cit:dateType/*/@codeListValue = ('publication', 'revision')]/
+                                      cit:date/gco:*[. != '']">
+                  <xsl:sort select="." order="descending"/>
+                </xsl:perform-sort>
+              </xsl:variable>
+              <xsl:choose>
+                <xsl:when test="$publicationDate/*[1]">
+                  <xsl:for-each select="$publicationDate/*[1]">
+                    (<xsl:value-of select="substring($publicationDate, 1, 4)"/>).
+                  </xsl:for-each>
+                </xsl:when>
+                <xsl:otherwise>.&#160;</xsl:otherwise>
+              </xsl:choose>
 
               <!-- Title -->
               <xsl:for-each select="mdb:identificationInfo/*/mri:citation/*/cit:title">
@@ -425,7 +437,7 @@
   and the coordinates displayed around -->
   <xsl:template mode="render-field"
                 match="gex:EX_GeographicBoundingBox[
-                            gex:westBoundLongitude/gco:Decimal != '']">
+                            gex:westBoundLongitude/gco:Decimal != '']" priority="100">
     <xsl:copy-of select="gn-fn-render:bbox(
                             xs:double(gex:westBoundLongitude/gco:Decimal),
                             xs:double(gex:southBoundLatitude/gco:Decimal),
@@ -433,6 +445,37 @@
                             xs:double(gex:northBoundLatitude/gco:Decimal))"/>
     <br/>
     <br/>
+  </xsl:template>
+
+
+  <!-- Display spatial extents containing bounding polygons on a map -->
+
+  <xsl:template mode="render-field"
+                match="gex:EX_Extent[gex:geographicElement/*/gex:polygon]"
+                priority="100">
+    <div class="entry name">
+    <h4>
+      <xsl:value-of select="tr:node-label(tr:create($schema), name(), null)"/>
+      <xsl:apply-templates mode="render-value"
+                           select="@*"/>
+    </h4>
+    <div class="target">
+
+    <xsl:apply-templates mode="render-field" select="gex:description"/>
+
+    <!-- Display all included bounding polygons/boxes on the one map -->
+
+    <xsl:copy-of select="gn-fn-render:extent($metadataUuid)"/>
+
+    <!-- Display any included geographic descriptions separately after map -->
+
+    <xsl:apply-templates mode="render-field" select="gex:geographicElement[gex:EX_GeographicDescription]"/>
+
+    <xsl:apply-templates mode="render-field" select="gex:temporalElement"/>
+    <xsl:apply-templates mode="render-field" select="gex:verticalElement"/>
+
+    </div>
+    </div>
   </xsl:template>
 
 
@@ -900,18 +943,32 @@
     </xsl:if>
   </xsl:template>
 
-
   <xsl:template mode="render-value"
                 match="*[gcx:Anchor]">
+    <xsl:apply-templates mode="render-value"
+                         select="gcx:Anchor"/>
+  </xsl:template>
+
+  <xsl:template mode="render-value"
+                match="gcx:Anchor">
+    <xsl:variable name="link"
+                  select="@xlink:href"/>
     <xsl:variable name="txt">
-      <xsl:apply-templates mode="localised" select=".">
+      <xsl:apply-templates mode="localised" select="..">
         <xsl:with-param name="langId" select="$langId"/>
       </xsl:apply-templates>
     </xsl:variable>
 
-    <a href="{gcx:Anchor/@xlink:href}">
-      <xsl:value-of select="$txt"/>
-    </a>
+    <xsl:choose>
+      <xsl:when test="$link != ''">
+        <a href="{$link}">
+          <xsl:value-of select="$txt"/>
+        </a>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$txt"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
   <xsl:template mode="render-value"

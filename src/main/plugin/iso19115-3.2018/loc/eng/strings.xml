@@ -295,6 +295,7 @@
   <keywordsInpire>Mots-clés relatifs à la directive INSPIRE</keywordsInpire>
 
   <extent>Geographic bounding box</extent>
+  <spatialExtent>Spatial extent</spatialExtent>
   <freeTextKeywords>Other keywords</freeTextKeywords>
   <noThesaurusName>Keywords</noThesaurusName>
 
