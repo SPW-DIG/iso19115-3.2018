@@ -52,22 +52,22 @@
     <xsl:variable name="currentCode" select=".//mcc:code/*/text()"/>
     <xsl:variable name="newCrs" select="$crsMap/crs[@code = $currentCode or text() = $currentCode]"/>
     <xsl:choose>
-      <xsl:when test="$newCrs">
+      <xsl:when test="$newCrs[1]">
         <mdb:referenceSystemInfo>
           <mrs:MD_ReferenceSystem>
             <mrs:referenceSystemIdentifier>
               <mcc:MD_Identifier>
                 <mcc:code>
-                  <gcx:Anchor xlink:href="{$newCrs/@code}"><xsl:value-of select="$newCrs/text()"/> </gcx:Anchor>
+                  <gcx:Anchor xlink:href="{$newCrs[1]/@code}"><xsl:value-of select="$newCrs[1]/text()"/> </gcx:Anchor>
                 </mcc:code>
                 <mcc:description>
-                  <gco:CharacterString><xsl:value-of select="$newCrs/@label"/></gco:CharacterString>
+                  <gco:CharacterString><xsl:value-of select="$newCrs[1]/@label"/></gco:CharacterString>
                 </mcc:description>
               </mcc:MD_Identifier>
             </mrs:referenceSystemIdentifier>
             <mrs:referenceSystemType>
               <mrs:MD_ReferenceSystemTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_ReferenceSystemTypeCode"
-                                              codeListValue="{$newCrs/@referenceSystemTypeCode}"/>
+                                              codeListValue="{$newCrs[1]/@referenceSystemTypeCode}"/>
             </mrs:referenceSystemType>
           </mrs:MD_ReferenceSystem>
         </mdb:referenceSystemInfo>
