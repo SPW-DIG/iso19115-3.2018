@@ -102,19 +102,21 @@ ORDER BY isInspire, title;
               </mco:MD_LegalConstraints>
             </mri:resourceConstraints>
             <mri:resourceConstraints>
-              <mco:useConstraints>
-                <mco:MD_RestrictionCode
-                  codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_RestrictionCode"
-                  codeListValue="otherRestrictions"/>
-              </mco:useConstraints>
-              <mco:useLimitation>
-                <gco:CharacterString>Conditions d'utilisation spécifiques</gco:CharacterString>
-              </mco:useLimitation>
-              <mco:otherConstraints>
-                <gcx:Anchor
-                  xlink:href="https://geoportail.wallonie.be/files/documents/ConditionsSPW/LicServicesSPW.pdf">Les conditions d'utilisation du service sont régies par les Conditions d’accès et d’utilisation des services web géographiques de visualisation du Service public de Wallonie.
-                </gcx:Anchor>
-              </mco:otherConstraints>
+              <mco:MD_LegalConstraints>
+                <mco:useConstraints>
+                  <mco:MD_RestrictionCode
+                    codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_RestrictionCode"
+                    codeListValue="otherRestrictions"/>
+                </mco:useConstraints>
+                <mco:useLimitation>
+                  <gco:CharacterString>Conditions d'utilisation spécifiques</gco:CharacterString>
+                </mco:useLimitation>
+                <mco:otherConstraints>
+                  <gcx:Anchor
+                    xlink:href="https://geoportail.wallonie.be/files/documents/ConditionsSPW/LicServicesSPW.pdf">Les conditions d'utilisation du service sont régies par les Conditions d’accès et d’utilisation des services web géographiques de visualisation du Service public de Wallonie.
+                  </gcx:Anchor>
+                </mco:otherConstraints>
+              </mco:MD_LegalConstraints>
             </mri:resourceConstraints>
           </xsl:when>
           <xsl:otherwise>
@@ -183,7 +185,7 @@ ORDER BY isInspire, title;
                     <xsl:when test="$isRestrictedCPUC">
                       <gcx:Anchor
                         xlink:href="https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CPU-TypeC.pdf">
-                        Les conditions générales d'utilisation s'appliquent mais sont restreintes par les conditions particulières de type C.
+                        Les conditions générales d'utilisation s'appliquent et sont étendues par les conditions particulières de type C.
                       </gcx:Anchor>
                     </xsl:when>
                   </xsl:choose>
