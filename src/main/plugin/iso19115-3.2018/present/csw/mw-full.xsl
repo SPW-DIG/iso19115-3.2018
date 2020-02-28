@@ -19,7 +19,8 @@
   <xsl:param name="displayInfo"/>
 
   <!-- Replace all 115-3 anchors by CharacterString -->
-  <xsl:template match="gcx:Anchor" priority="99999">
+  <xsl:template match="gcx:Anchor[count(ancestor::mdb:referenceSystemInfo) = 0]"
+                priority="99999">
     <gco:CharacterString><xsl:value-of select="."/></gco:CharacterString>
   </xsl:template>
 
