@@ -7,7 +7,17 @@
                 exclude-result-prefixes="#all">
 
   <!-- Remove all contact not having an email -->
-  <xsl:template match="*[gmd:CI_ResponsibleParty and count(gmd:CI_ResponsibleParty/gmd:contactInfo/*/gmd:address/*/gmd:electronicMailAddress[*/text() != '']) = 0]" priority="2"/>
+  <xsl:template match="*[gmd:CI_ResponsibleParty
+                         and count(gmd:CI_ResponsibleParty/gmd:contactInfo/*/gmd:address/*/gmd:electronicMailAddress[*/text() != '']) = 0]"
+                priority="2"/>
+
+  <!-- Remove all online source not using HTTP to conform with
+  https://github.com/inspire-eu-validation/community/issues/95
+  -->
+  <xsl:template match="*[gmd:CI_OnlineResource
+                         and count(gmd:CI_OnlineResource/gmd:linkage/gmd:URL[not(starts-with(text(), 'http'))]) > 0]"
+                priority="2"/>
+
 
   <!-- Remove geonet:* elements. -->
   <xsl:template match="gn:*" priority="2"/>
