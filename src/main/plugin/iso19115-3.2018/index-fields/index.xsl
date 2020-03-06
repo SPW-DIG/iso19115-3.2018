@@ -26,6 +26,7 @@
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0"
                 xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0"
+                xmlns:gcx="http://standards.iso.org/iso/19115/-3/gcx/1.0"
                 xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0"
                 xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.1"
                 xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0"
@@ -37,6 +38,7 @@
                 xmlns:mrs="http://standards.iso.org/iso/19115/-3/mrs/1.0"
                 xmlns:mdq="http://standards.iso.org/iso/19157/-2/mdq/1.0"
                 xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0"
+                xmlns:util="java:org.fao.geonet.util.XslUtil"
                 xmlns:index="java:org.fao.geonet.kernel.search.EsSearchManager"
                 xmlns:gn-fn-index="http://geonetwork-opensource.org/xsl/functions/index"
                 xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -118,17 +120,25 @@
                             lan:language/lan:LanguageCode/
                               @codeListValue[normalize-space(.) != '']"/>
 
+
     <xsl:variable name="otherLanguages" as="attribute()*"
                   select="mdb:otherLocale/lan:PT_Locale/
                             lan:language/lan:LanguageCode/
                               @codeListValue[normalize-space(.) != '']"/>
+
+    <xsl:variable name="allLanguages">
+      <lang id="default" value="{$mainLanguage}"/>
+      <xsl:for-each select="$otherLanguages">
+        <lang id="{../../../@id}" value="{.}"/>
+      </xsl:for-each>
+    </xsl:variable>
 
     <!-- Record is dataset if no hierarchyLevel -->
     <xsl:variable name="isDataset" as="xs:boolean"
                   select="
                       count(mdb:metadataScope[mdb:MD_MetadataScope/
                               mdb:resourceScope/mcc:MD_ScopeCode/@codeListValue='dataset']) > 0 or
-                      count(mdb:metadataScopel) = 0"/>
+                      count(mdb:metadataScope) = 0"/>
     <xsl:variable name="isService" as="xs:boolean"
                   select="
                       count(mdb:metadataScope[mdb:MD_MetadataScope/
@@ -139,19 +149,14 @@
 
     <!-- Create a first document representing the main record. -->
     <doc>
-      <documentType>metadata</documentType>
-      <documentStandard>iso19115-3.2018</documentStandard>
-
+      <xsl:copy-of select="gn-fn-index:add-field('docType', 'metadata')"/>
+      <xsl:copy-of select="gn-fn-index:add-field('documentStandard', 'iso19115-3.2018')"/>
       <!-- Index the metadata document as XML -->
       <document>
         <!--<xsl:value-of select="saxon:serialize(., 'default-serialize-mode')"/>-->
       </document>
-      <uuid>
-        <xsl:value-of select="$identifier"/>
-      </uuid>
-      <metadataIdentifier>
-        <xsl:value-of select="$identifier"/>
-      </metadataIdentifier>
+
+      <xsl:copy-of select="gn-fn-index:add-field('metadataIdentifier', $identifier)"/>
 
       <!--<xsl:if test="$pointOfTruthURLPattern != ''">
         &lt;!&ndash; TODO: add metadataLinkage&ndash;&gt;
@@ -163,9 +168,7 @@
 
       <xsl:for-each
         select="mdb:metadataStandard/cit:CI_Citation/cit:title/gco:CharacterString">
-        <standardName>
-          <xsl:value-of select="normalize-space(.)"/>
-        </standardName>
+        <xsl:copy-of select="gn-fn-index:add-field('standardName', normalize-space(.))"/>
       </xsl:for-each>
 
 
@@ -205,14 +208,10 @@
 
 
       <!-- # Languages -->
-      <mainLanguage>
-        <xsl:value-of select="$mainLanguage"/>
-      </mainLanguage>
+      <xsl:copy-of select="gn-fn-index:add-field('mainLanguage', $mainLanguage)"/>
 
       <xsl:for-each select="$otherLanguages">
-        <otherLanguage>
-          <xsl:value-of select="."/>
-        </otherLanguage>
+        <xsl:copy-of select="gn-fn-index:add-field('otherLanguage', .)"/>
       </xsl:for-each>
 
 
@@ -253,9 +252,28 @@
                             name() != 'cit:CI_DateTypeCode' and
                             name() != 'lan:LanguageCode'
                             ]">
-        <xsl:element name="codelist_{local-name(..)}">
-          <xsl:value-of select="@codeListValue"/>
+        <xsl:variable name="parentName"
+                      select="local-name(..)"/>
+        <xsl:variable name="name"
+                      select="name()"/>
+        <xsl:variable name="value"
+                      select="@codeListValue"/>
+        <xsl:element name="codelist_{$parentName}">
+          <xsl:value-of select="$value"/>
         </xsl:element>
+
+        <xsl:for-each select="$allLanguages/lang">
+          <xsl:variable name="translation"
+                        select="util:getCodelistTranslation(string($name), string($value), string(@value))"/>
+          <xsl:if test="@id = 'default'">
+            <xsl:element name="codelist_{$parentName}_text">
+              <xsl:value-of select="$translation"/>
+            </xsl:element>
+          </xsl:if>
+          <xsl:element name="codelist_{$parentName}_text_lang{@value}">
+            <xsl:value-of select="$translation"/>
+          </xsl:element>
+        </xsl:for-each>
       </xsl:for-each>
 
 
@@ -268,13 +286,8 @@
       -->
       <xsl:for-each select="mdb:identificationInfo[1]/*[1]">
         <xsl:for-each select="mri:citation/cit:CI_Citation">
-          <resourceTitle>
-            <xsl:value-of select="cit:title/gco:CharacterString/text()"/>
-          </resourceTitle>
-          <resourceAltTitle>
-            <xsl:value-of
-              select="cit:alternateTitle/gco:CharacterString/text()"/>
-          </resourceAltTitle>
+          <xsl:copy-of select="gn-fn-index:add-multilingual-field('resourceTitle', cit:title, $allLanguages)"/>
+          <xsl:copy-of select="gn-fn-index:add-multilingual-field('resourceAltTitle', cit:alternateTitle, $allLanguages)"/>
 
           <xsl:for-each select="cit:date/cit:CI_Date[cit:date/*/text() != '' and
                                   matches(cit:date/*/text(), '[0-9]{4}.*')]">
@@ -294,6 +307,13 @@
             </xsl:element>
           </xsl:for-each>
 
+          <!-- TODO: Add support for Anchor, can be a DOI -->
+          <xsl:for-each select="cit:identifier/*/mcc:code/(gco:CharacterString|gcx:Anchor)">
+            <resourceIdentifier>
+              <xsl:value-of select="."/>
+            </resourceIdentifier>
+          </xsl:for-each>
+
           <xsl:for-each
             select="cit:presentationForm/cit:CI_PresentationFormCode/@codeListValue[. != '']">
             <presentationForm>
@@ -302,11 +322,7 @@
           </xsl:for-each>
         </xsl:for-each>
 
-        <resourceAbstract>
-          <xsl:value-of
-            select="substring(mri:abstract/gco:CharacterString, 0, $maxFieldLength)"/>
-        </resourceAbstract>
-
+        <xsl:copy-of select="gn-fn-index:add-multilingual-field('resourceAbstract', mri:abstract, $allLanguages)"/>
 
         <!-- Indexing resource contact -->
         <xsl:apply-templates mode="index-contact"
@@ -315,24 +331,23 @@
         </xsl:apply-templates>
 
 
-        <xsl:for-each select="mri:credit/*[. != '']">
-          <resourceCredit>
-            <xsl:value-of select="."/>
-          </resourceCredit>
-        </xsl:for-each>
-
+        <xsl:copy-of select="gn-fn-index:add-multilingual-field('resourceCredit', mri:credit[* != ''], $allLanguages)"/>
 
         <xsl:variable name="overviews"
                       select="mri:graphicOverview/mcc:MD_BrowseGraphic/
                                 mcc:fileName/gco:CharacterString[. != '']"/>
-        <hasOverview>
-          <xsl:value-of select="if (count($overviews) > 0) then 'true' else 'false'"/>
-        </hasOverview>
+
+        <xsl:copy-of select="gn-fn-index:add-field('hasOverview', if (count($overviews) > 0) then 'true' else 'false')"/>
+
 
         <xsl:for-each select="$overviews">
-          <overviewUrl>
-            <xsl:value-of select="."/>
-          </overviewUrl>
+          <!-- TODO can be multilingual desc and name -->
+          <overview type="object">{
+            "url": "<xsl:value-of select="."/>"
+            <xsl:if test="count(../../mcc:fileDescription) > 0">,</xsl:if>
+            "text":
+            <xsl:value-of select="gn-fn-index:add-multilingual-field('name', ../../mcc:fileDescription, $allLanguages, true())"/>
+            }</overview>
         </xsl:for-each>
 
 
@@ -371,10 +386,11 @@
         <xsl:for-each
           select="$inspireKeywords">
           <xsl:variable name="position" select="position()"/>
-          <xsl:for-each select="gco:CharacterString[. != '']">
+          <xsl:for-each select="gco:CharacterString[. != '']|
+                                gcx:Anchor[. != '']">
 
             <xsl:variable name="inspireTheme" as="xs:string"
-                          select="text()"/>
+                          select="index:analyzeField('synInspireThemes', text())"/>
 
             <inspireTheme_syn>
               <xsl:value-of select="text()"/>
@@ -394,13 +410,21 @@
               <inspireThemeFirst>
                 <xsl:value-of select="$inspireTheme"/>
               </inspireThemeFirst>
-              <inspireAnnexForFirstTheme>
-                <xsl:value-of
-                  select="$inspireTheme"/>
-              </inspireAnnexForFirstTheme>
+              <xsl:if test="$inspireTheme != ''">
+                <inspireAnnexForFirstTheme>
+                  <xsl:value-of
+                    select="index:analyzeField('synInspireAnnexes', $inspireTheme)"/>
+                </inspireAnnexForFirstTheme>
+                <xsl:variable name="inspireThemeUri" as="xs:string"
+                              select="index:analyzeField('synInspireThemeUris', $inspireTheme)"/>
+                <inspireThemeUri>
+                  <xsl:value-of select="$inspireThemeUri"/>
+                </inspireThemeUri>
+              </xsl:if>
             </xsl:if>
             <inspireAnnex>
-              <xsl:value-of select="text()"/>
+              <xsl:value-of
+                select="index:analyzeField('synInspireAnnexes', $inspireTheme)"/>
             </inspireAnnex>
           </xsl:for-each>
         </xsl:for-each>
@@ -470,17 +494,16 @@
 
         <!-- Index all keywords having a specific thesaurus -->
         <xsl:for-each
-          select="*/mri:MD_Keywords[mri:thesaurusName]/
-                            mri:keyword">
+          select="*/mri:MD_Keywords[mri:thesaurusName]">
 
           <xsl:variable name="thesaurusName"
-                        select="../mri:thesaurusName[1]/cit:CI_Citation/
+                        select="mri:thesaurusName[1]/cit:CI_Citation/
                                   cit:title[1]/gco:CharacterString"/>
 
           <xsl:variable name="thesaurusId"
-                        select="normalize-space(../mri:thesaurusName/cit:CI_Citation/
+                        select="normalize-space(mri:thesaurusName/cit:CI_Citation/
                                   cit:identifier/mcc:MD_Identifier/
-                                    mcc:code/*)"/>
+                                    mcc:code/(gco:CharacterString|gcx:Anchor)/text())"/>
 
           <xsl:variable name="key">
             <xsl:choose>
@@ -502,25 +525,86 @@
             <xsl:variable name="thesaurusField"
                           select="concat('thesaurus_', replace($key, '[^a-zA-Z0-9]', ''))"/>
 
+            <xsl:element name="{$thesaurusField}Number">
+              <xsl:value-of select="count(mri:keyword/(*[normalize-space() != '']))"/>
+            </xsl:element>
 
-            <xsl:for-each select="*[normalize-space() != '']|
+            <xsl:for-each select="mri:keyword/(*[normalize-space() != '']|
                                   */@xlink:href[normalize-space() != '']|
-                                  lan:PT_FreeText/lan:textGroup/lan:LocalisedCharacterString[normalize-space() != '']">
+                                  lan:PT_FreeText/lan:textGroup/lan:LocalisedCharacterString[normalize-space() != ''])">
               <xsl:element name="{$thesaurusField}">
                 <xsl:value-of select="normalize-space(.)"/>
               </xsl:element>
-
-              <!--<xsl:if test="$thesaurusField = 'thesaurus_geonetworkthesauruslocalthemesextanttheme'">
-                <xsl:variable name="theme"
-                              select="index:analyzeField('synSextantThemes', normalize-space(.))"/>
-                <xsl:if test="$theme != ''">
-                  <sextantTheme><xsl:value-of select="$theme"/></sextantTheme>
-                  <sextantThemePath><xsl:value-of select="$theme"/></sextantThemePath>
-                </xsl:if>
-              </xsl:if>-->
             </xsl:for-each>
+
+
+            <xsl:call-template name="build-tree-values">
+              <xsl:with-param name="values"
+                              select="mri:keyword/(*[normalize-space() != '']|
+                                */@xlink:href[normalize-space() != '']|
+                                lan:PT_FreeText/lan:textGroup/lan:LocalisedCharacterString[normalize-space() != ''])"/>
+              <xsl:with-param name="thesaurus"
+                              select="$thesaurusId"/>
+              <xsl:with-param name="language"
+                              select="$mainLanguage"/>
+              <xsl:with-param name="fieldName"
+                              select="concat($thesaurusField, '_tree')"/>
+              <xsl:with-param name="allTreeField"
+                              select="true()"/>
+            </xsl:call-template>
           </xsl:if>
         </xsl:for-each>
+
+
+        <allKeywords type="object">{
+          <xsl:for-each-group select="*/mri:MD_Keywords"
+                              group-by="mri:thesaurusName/*/cit:title/*/text()">
+            <xsl:sort select="current-grouping-key()"/>
+            <xsl:variable name="thesaurusName"
+                          select="current-grouping-key()"/>
+
+            <xsl:variable name="thesaurusId"
+                          select="normalize-space(mri:thesaurusName/*/
+                                    cit:identifier[position() = 1]/*/
+                                      cit:code/(gco:CharacterString|gcx:Anchor)/text())"/>
+
+            <xsl:variable name="key">
+              <xsl:choose>
+                <xsl:when test="$thesaurusId != ''">
+                  <xsl:value-of select="$thesaurusId"/>
+                </xsl:when>
+                <!-- Try to build a thesaurus key based on the name
+                by removing space - to be improved. -->
+                <xsl:when test="normalize-space($thesaurusName) != ''">
+                  <xsl:value-of select="replace($thesaurusName, ' ', '-')"/>
+                </xsl:when>
+              </xsl:choose>
+            </xsl:variable>
+
+            <xsl:if test="normalize-space($key) != ''">
+              <xsl:variable name="thesaurusField"
+                            select="replace($key, '[^a-zA-Z0-9]', '')"/>
+
+              "<xsl:value-of select="$thesaurusField"/>": {
+              "id": "<xsl:value-of select="gn-fn-index:json-escape($thesaurusId)"/>",
+              "title": "<xsl:value-of select="gn-fn-index:json-escape($thesaurusName)"/>",
+              "theme": "<xsl:value-of select="gn-fn-index:json-escape(mri:type/*/@codeListValue)"/>",
+              "link": "<xsl:value-of select="gn-fn-index:json-escape(@xlink:href)"/>",
+              "keywords": [
+              <xsl:for-each select="mri:keyword/(*[normalize-space() != '']|
+                                    */@xlink:href[normalize-space() != '']|
+                                    lan:PT_FreeText/lan:textGroup/lan:LocalisedCharacterString[normalize-space() != ''])">
+                <!-- TODOES: Index translations -->
+                {"value": "<xsl:value-of select="gn-fn-index:json-escape(.)"/>",
+                "link": "<xsl:value-of select="gn-fn-index:json-escape(@xlink:href)"/>"}
+                <xsl:if test="position() != last()">,</xsl:if>
+              </xsl:for-each>
+              ]}
+              <xsl:if test="position() != last()">,</xsl:if>
+            </xsl:if>
+          </xsl:for-each-group>
+          }</allKeywords>
+
 
 
         <xsl:for-each select="mri:topicCategory/mri:MD_TopicCategoryCode">
@@ -533,7 +617,7 @@
 
         <xsl:for-each select="mri:spatialResolution/mri:MD_Resolution">
           <xsl:for-each
-            select="mri:equivalentScale/mri:MD_RepresentativeFraction/mri:denominator/gco:Integer[. != '']">
+            select="mri:equivalentScale/mri:MD_RepresentativeFraction/mri:denominator/gco:Integer[. castable as xs:decimal]">
             <resolutionScaleDenominator>
               <xsl:value-of select="."/>
             </resolutionScaleDenominator>
@@ -553,34 +637,18 @@
           </spatialRepresentationType>
         </xsl:for-each>
 
+        <xsl:for-each select="mri:resourceConstraints/*">
+          <xsl:variable name="fieldPrefix" select="local-name()"/>
 
-        <xsl:for-each select="mri:resourceConstraints">
-          <xsl:for-each
-            select="*/mco:accessConstraints/mco:MD_RestrictionCode/@codeListValue[. != '']">
-            <accessConstraints>
-              <xsl:value-of select="."/>
-            </accessConstraints>
-          </xsl:for-each>
-          <xsl:for-each
-            select="*/mco:otherConstraints/gco:CharacterString[. != '']">
-            <otherConstraints>
-              <xsl:value-of select="."/>
-            </otherConstraints>
-          </xsl:for-each>
-          <xsl:for-each
-            select="*/mco:classification/mco:MD_ClassificationCode/@codeListValue[. != '']">
-            <constraintClassification>
-              <xsl:value-of select="."/>
-            </constraintClassification>
-          </xsl:for-each>
-          <xsl:for-each
-            select="*/mco:useLimitation/gco:CharacterString[. != '']">
-            <useLimitation>
-              <xsl:value-of select="."/>
-            </useLimitation>
-          </xsl:for-each>
+          <xsl:copy-of select="gn-fn-index:add-multilingual-field(concat($fieldPrefix, 'OtherConstraints'), mco:otherConstraints , $allLanguages)"/>
+
+          <xsl:copy-of select="gn-fn-index:add-multilingual-field(concat($fieldPrefix, 'UseLimitation'), mco:useLimitation, $allLanguages)"/>
         </xsl:for-each>
 
+
+        <xsl:if test="*/gex:EX_Extent/*/gex:EX_BoundingPolygon">
+          <hasBoundingPolygon>true</hasBoundingPolygon>
+        </xsl:if>
 
         <xsl:for-each select="*/gex:EX_Extent">
 
@@ -645,8 +713,8 @@
                   </xsl:when>
                   <xsl:otherwise>
                     <geom>
-                      <xsl:text>{"type": "polygon",</xsl:text>
-                      <xsl:text>"coordinates": [</xsl:text>
+                      <xsl:text>{"type": "Polygon",</xsl:text>
+                      <xsl:text>"coordinates": [[</xsl:text>
                       <xsl:value-of select="concat('[', $w, ',', $s, ']')"/>
                       <xsl:text>,</xsl:text>
                       <xsl:value-of select="concat('[', $e, ',', $s, ']')"/>
@@ -656,7 +724,7 @@
                       <xsl:value-of select="concat('[', $w, ',', $n, ']')"/>
                       <xsl:text>,</xsl:text>
                       <xsl:value-of select="concat('[', $w, ',', $s, ']')"/>
-                      <xsl:text>]}</xsl:text>
+                      <xsl:text>]]}</xsl:text>
                     </geom>
 
                     <location><xsl:value-of select="concat(
@@ -681,7 +749,8 @@
             <xsl:value-of select="text()"/>
           </serviceType>
           <xsl:variable name="inspireServiceType" as="xs:string"
-                        select="text()"/>
+                        select="index:analyzeField(
+                                  'keepInspireServiceTypes', text())"/>
           <xsl:if test="$inspireServiceType != ''">
             <inspireServiceType>
               <xsl:value-of select="lower-case($inspireServiceType)"/>
@@ -700,14 +769,21 @@
 
 
       <xsl:for-each select="mdb:referenceSystemInfo/*">
-        <xsl:for-each select="mrs:referenceSystemIdentifier/mcc:RS_Identifier">
-          <xsl:variable name="crs" select="mcc:code/gco:CharacterString"/>
+        <xsl:for-each select="mrs:referenceSystemIdentifier/*">
+          <xsl:variable name="crs" select="(mcc:description/*/text()|mcc:code/*/text())[1]"/>
 
           <xsl:if test="$crs != ''">
             <coordinateSystem>
               <xsl:value-of select="$crs"/>
             </coordinateSystem>
           </xsl:if>
+
+          <crsDetails type="object">{
+            "code": "<xsl:value-of select="gn-fn-index:json-escape(mcc:code/*/text())"/>",
+            "codeSpace": "<xsl:value-of select="gn-fn-index:json-escape(mcc:codeSpace/*/text())"/>",
+            "name": "<xsl:value-of select="gn-fn-index:json-escape(mcc:description/*/text())"/>",
+            "url": "<xsl:value-of select="gn-fn-index:json-escape(mcc:code/*/@xlink:href)"/>"
+            }</crsDetails>
         </xsl:for-each>
       </xsl:for-each>
 
@@ -885,28 +961,53 @@
 
       <!-- Index more fields in this element -->
       <xsl:apply-templates mode="index-extra-fields" select="."/>
+
+      <xsl:variable name="recordLinks"
+                    select="mdb:parentMetadata/@uuidref[. != '']"/>
+      <xsl:choose>
+        <xsl:when test="count($recordLinks) > 0">
+          <xsl:for-each select="$recordLinks">
+            <parentUuid><xsl:value-of select="."/></parentUuid>
+            <recordGroup><xsl:value-of select="."/></recordGroup>
+            <recordLink type="object">{"name": "children", "parent": "<xsl:value-of select="gn-fn-index:json-escape(.)"/>"}</recordLink>
+          </xsl:for-each>
+        </xsl:when>
+        <xsl:otherwise>
+          <recordGroup><xsl:value-of select="$identifier"/></recordGroup>
+        </xsl:otherwise>
+      </xsl:choose>
     </doc>
 
     <!-- Index more documents for this element -->
     <xsl:apply-templates mode="index-extra-documents" select="."/>
-
   </xsl:template>
+
 
 
   <xsl:template mode="index-contact" match="*[cit:CI_Responsibility]">
     <xsl:param name="fieldSuffix" select="''" as="xs:string"/>
 
-    <!-- Select the first child which should be a CI_ResponsibleParty.
-    Some records contains more than one CI_ResponsibleParty which is
-    not valid and they will be ignored.
-     Same for organisationName eg. de:b86a8604-bf78-480f-a5a8-8edff5586679 -->
     <xsl:variable name="organisationName"
-                  select="*[1]/cit:party/cit:CI_Organisation/cit:name/gco:CharacterString"
+                  select="(.//cit:CI_Organisation/cit:name/gco:CharacterString)[1]"
                   as="xs:string*"/>
+    <xsl:variable name="uuid" select="@uuid"/>
 
     <xsl:variable name="role"
                   select="replace(*[1]/cit:role/*/@codeListValue, ' ', '')"
                   as="xs:string?"/>
+    <xsl:variable name="logo" select="(.//cit:logo/*/mcc:fileName/*)[1]"/>
+    <xsl:variable name="website" select=".//cit:onlineResource/*/cit:linkage/gco:CharacterString"/>
+    <xsl:variable name="email"
+                  select="(.//cit:contactInfo/*/cit:address/*/cit:electronicMailAddress/gco:CharacterString)[1]"/>
+    <xsl:variable name="phone"
+                  select="(./cit:contactInfo/*/cit:phone/*/cit:number[normalize-space(.) != '']/*/text())[1]"/>
+    <xsl:variable name="individualName"
+                  select="(.//cit:individualName/gco:CharacterString/text())[1]"/>
+    <xsl:variable name="positionName"
+                  select="(.//cit:positionName/gco:CharacterString/text())[1]"/>
+    <xsl:variable name="address" select="string-join(.//cit:contactInfo/*/cit:address/*/(
+                                        cit:deliveryPoint|cit:postalCode|cit:city|
+                                        cit:administrativeArea|cit:country)/gco:CharacterString/text(), ', ')"/>
     <xsl:if test="normalize-space($organisationName) != ''">
       <xsl:element name="Org{$fieldSuffix}">
         <xsl:value-of select="$organisationName"/>
@@ -915,8 +1016,20 @@
         <xsl:value-of select="$organisationName"/>
       </xsl:element>
     </xsl:if>
-    <xsl:element name="contact{$fieldSuffix}">{"org":"<xsl:value-of
-      select="replace($organisationName, '&quot;', '\\&quot;')"/>", "role":"<xsl:value-of select="$role"/>"}
+    <xsl:element name="contact{$fieldSuffix}">
+      <!-- TODO: Can be multilingual -->
+      <xsl:attribute name="type" select="'object'"/>{
+      "organisation":"<xsl:value-of
+      select="gn-fn-index:json-escape($organisationName)"/>",
+      "role":"<xsl:value-of select="$role"/>",
+      "email":"<xsl:value-of select="$email"/>",
+      "website":"<xsl:value-of select="$website"/>",
+      "logo":"<xsl:value-of select="$logo"/>",
+      "individual":"<xsl:value-of select="gn-fn-index:json-escape($individualName)"/>",
+      "position":"<xsl:value-of select="gn-fn-index:json-escape($positionName)"/>",
+      "phone":"<xsl:value-of select="gn-fn-index:json-escape($phone)"/>",
+      "address":"<xsl:value-of select="gn-fn-index:json-escape($address)"/>"
+      }
     </xsl:element>
   </xsl:template>
 
