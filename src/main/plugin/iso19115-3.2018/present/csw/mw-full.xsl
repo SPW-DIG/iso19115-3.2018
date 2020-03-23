@@ -51,11 +51,18 @@
   <xsl:variable name="isRestrictedCPUA"
                 select="count(//mco:otherConstraints/*[@xlink:href='https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CPU-TypeA.pdf']) > 0"/>
 
-
+  <xsl:template match="mri:resourceConstraints/*[mco:otherConstraints/*/text() = 'No limitations to public access']">
+    <gmd:MD_LegalConstraints>
+      <xsl:apply-templates select="mco:accessConstraints"/>
+      <xsl:if test="not(*[mco:otherConstraints/*/text() = 'No limitations to public access'])">
+        <xsl:apply-templates select="mco:otherConstraints"/>
+      </xsl:if>
+    </gmd:MD_LegalConstraints>
+  </xsl:template>
   <xsl:template match="mri:resourceConstraints/*[mco:useLimitation/*/text() = 'Conditions d''accès et d''utilisation spécifiques' and $isUsingAnchorForConstraints]">
     <gmd:MD_LegalConstraints>
-      <xsl:apply-templates select="mco:useLimitation|mco:useConstraints"/>
-
+      <!--xsl:apply-templates select="mco:useLimitation|mco:useConstraints"/-->
+      <xsl:apply-templates select="mco:useConstraints"/>
       <gmd:otherConstraints>
         <xsl:choose>
           <xsl:when test="$isRestrictedA1">
