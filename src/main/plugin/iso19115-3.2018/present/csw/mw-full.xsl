@@ -54,9 +54,7 @@
   <xsl:template match="mri:resourceConstraints/*[mco:otherConstraints/*/text() = 'No limitations to public access']">
     <gmd:MD_LegalConstraints>
       <xsl:apply-templates select="mco:accessConstraints"/>
-      <xsl:if test="not(*[mco:otherConstraints/*/text() = 'No limitations to public access'])">
-        <xsl:apply-templates select="mco:otherConstraints"/>
-      </xsl:if>
+      <xsl:apply-templates select="mco:otherConstraints[not(contains(*, 'No limitations to public access'))]" />
     </gmd:MD_LegalConstraints>
   </xsl:template>
   <xsl:template match="mri:resourceConstraints/*[mco:useLimitation/*/text() = 'Conditions d''accès et d''utilisation spécifiques' and $isUsingAnchorForConstraints]">
