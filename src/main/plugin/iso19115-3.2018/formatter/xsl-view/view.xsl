@@ -134,6 +134,7 @@
         </xsl:for-each>
       </xsl:variable>
 
+
       <xsl:choose>
         <xsl:when test="$byThesaurus">
           <xsl:for-each-group select="$tags/tag" group-by="@thesaurus">
@@ -144,9 +145,16 @@
 
             <xsl:for-each select="current-group()">
               <xsl:sort select="."/>
-              <a href="#/search?keyword={.}">
-                <span class="badge"><xsl:value-of select="."/></span>
-              </a>
+              <xsl:choose>
+                <xsl:when test="$portalLink != ''">
+                  <span class="badge"><xsl:value-of select="."/></span>
+                </xsl:when>
+                <xsl:otherwise>
+                  <a href="#/search?keyword={.}">
+                    <span class="badge"><xsl:value-of select="."/></span>
+                  </a>
+                </xsl:otherwise>
+              </xsl:choose>
             </xsl:for-each>
             <xsl:if test="position() != last()">
               <hr/>
@@ -156,9 +164,17 @@
         <xsl:otherwise>
           <xsl:for-each select="$tags/tag">
             <xsl:sort select="."/>
-            <a href="#/search?keyword={.}">
-              <span class="badge"><xsl:value-of select="."/></span>
-            </a>
+
+            <xsl:choose>
+              <xsl:when test="$portalLink != ''">
+                <span class="badge"><xsl:value-of select="."/></span>
+              </xsl:when>
+              <xsl:otherwise>
+                <a href="#/search?keyword={.}">
+                  <span class="badge"><xsl:value-of select="."/></span>
+                </a>
+              </xsl:otherwise>
+            </xsl:choose>
           </xsl:for-each>
         </xsl:otherwise>
       </xsl:choose>
@@ -347,6 +363,7 @@
 
 
   <!-- Most of the elements are ... -->
+  <!-- Most of the elements are ... -->
   <xsl:template mode="render-field"
                 match="*[gco:CharacterString = '']|*[gco:Integer = '']|
                        *[gco:Decimal = '']|*[gco:Boolean = '']|
@@ -355,6 +372,7 @@
                        *[gco:Record = '']|*[gco:RecordType = '']|
                        *[gco:LocalName = '']|*[lan:PT_FreeText = '']|
                        *[gml:beginPosition = '']|*[gml:endPosition = '']|
+                       gml:description[. != '']|gml:timePosition[. != '']|
                        *[gco:Date = '']|*[gco:DateTime = '']|*[gco:TM_PeriodDuration = '']"
                 priority="500"/>
   <xsl:template mode="render-field"
@@ -368,6 +386,7 @@
                        *[gml:beginPosition != '']|*[gml:endPosition != '']|
                        *[gco:Date != '']|*[gco:DateTime != '']|*[gco:TM_PeriodDuration != '']|
                        *[*/@codeListValue]|*[@codeListValue]|
+                       gml:description[. != '']|gml:timePosition[. != '']|
                        gml:beginPosition[. != '']|gml:endPosition[. != '']"
                 priority="500">
     <xsl:param name="fieldName" select="''" as="xs:string"/>
@@ -417,14 +436,27 @@
   </xsl:template>
 
 
-  <!-- Some major sections are boxed -->
+
+  <!-- Some major sections are boxed but
+  * if part of fieldsWithFieldset exception
+  * has content
+  * only if more than one child to be displayed (non flat mode only) bypass container elements
+  . -->
   <xsl:template mode="render-field"
-                match="*[not(gco:CharacterString) and (
-                          name() = $configuration/editor/fieldsWithFieldset/name or
-                          @gco:isoType = $configuration/editor/fieldsWithFieldset/name)]|
-                       *[$isFlatMode = false() and not(gco:CharacterString)]"
+                match="*[$isFlatMode = true() and not(gco:CharacterString) and (
+                            name() = $configuration/editor/fieldsWithFieldset/name
+                            or @gco:isoType = $configuration/editor/fieldsWithFieldset/name)]|
+                       *[$isFlatMode = false() and not(gco:CharacterString) and (
+                            name() = $configuration/editor/fieldsWithFieldset/name
+                            or @gco:isoType = $configuration/editor/fieldsWithFieldset/name
+                            or count(*) > 1)]"
                 priority="100">
-    <xsl:if test="count(*) > 0">
+
+    <xsl:variable name="content">
+      <xsl:apply-templates mode="render-field" select="*"/>
+    </xsl:variable>
+
+    <xsl:if test="count($content/*) > 0">
       <div class="entry name">
         <h2>
           <xsl:value-of select="tr:node-label(tr:create($schema), name(), null)"/>
@@ -437,6 +469,7 @@
       </div>
     </xsl:if>
   </xsl:template>
+
 
 
   <!-- Bbox is displayed with an overview and the geom displayed on it
@@ -992,7 +1025,7 @@
   </xsl:template>
 
   <xsl:template mode="render-value"
-                match="*[gco:TM_PeriodDuration]"
+                match="*[gco:TM_PeriodDuration != '']"
                 priority="99">
     <div data-gn-field-duration-div="{gco:TM_PeriodDuration}"><xsl:value-of select="gco:TM_PeriodDuration"/></div>
   </xsl:template>
