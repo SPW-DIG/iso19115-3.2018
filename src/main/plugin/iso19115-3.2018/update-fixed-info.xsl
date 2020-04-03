@@ -12,6 +12,7 @@
   xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0"
   xmlns:mrd="http://standards.iso.org/iso/19115/-3/mrd/1.0"
   xmlns:dqm="http://standards.iso.org/iso/19157/-2/dqm/1.0"
+  xmlns:mdq="http://standards.iso.org/iso/19157/-2/mdq/1.0"
   xmlns:gfc="http://standards.iso.org/iso/19110/gfc/1.1"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:gn-fn-iso19115-3.2018="http://geonetwork-opensource.org/xsl/functions/profiles/iso19115-3.2018"
@@ -442,6 +443,12 @@
     </xsl:copy>
   </xsl:template>
 
+  <xsl:template match="mdb:dataQualityInfo/mdq:DQ_DataQuality/mdq:scope/*/mcc:level/*/@codeListValue[. = '']">
+    <xsl:attribute name="codeListValue">
+      <xsl:value-of select="/root/*/mdb:metadataScope/*/mdb:resourceScope/*/@codeListValue"/>
+    </xsl:attribute>
+  </xsl:template>
+
 
   <!-- Do not allow to expand operatesOn sub-elements
     and constrain users to use uuidref attribute to link
@@ -599,6 +606,7 @@
     </xsl:choose>
   </xsl:template>
   -->
+
 
   <!-- Remove empty DQ elements, empty transfer options. -->
   <xsl:template match="mdb:dataQualityInfo[count(*) = 0]"/>
