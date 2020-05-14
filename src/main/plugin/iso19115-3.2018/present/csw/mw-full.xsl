@@ -104,13 +104,14 @@
     Add aggregates http://metawal.wallonie.be/geonetwork/srv/api/records/1880/related?type=associated
     -->
     <xsl:variable name="apiUrlRelated"
-                  select="concat($nodeUrl, 'api/records/', //mdb:metadataIdentifier/*/mcc:code/*/text(), '/related?type=associated')"/>
+                  select="concat($nodeUrl, 'api/records/', //mdb:metadataIdentifier/*/mcc:code/*/text(), '/related?type=associated&amp;type=brothersAndSisters')"/>
     <xsl:variable name="associatedRecords"
                   select="document($apiUrlRelated)"/>
     <xsl:variable name="existingAssociations"
                   select="../mri:associatedResource/*/mri:metadataReference/@uuidref"/>
-
-    <xsl:for-each select="$associatedRecords/related/associated/item">
+<xsl:message><xsl:value-of select="$apiUrlRelated"/> </xsl:message>
+<xsl:message>aa<xsl:copy-of select="$associatedRecords"/> </xsl:message>
+    <xsl:for-each select="$associatedRecords/related/*/item">
       <xsl:variable name="uuid" select="id"/>
       <xsl:if test="count($existingAssociations[. = $uuid]) = 0">
         <xsl:comment>Added from <xsl:value-of select="$apiUrlRelated"/> </xsl:comment>
