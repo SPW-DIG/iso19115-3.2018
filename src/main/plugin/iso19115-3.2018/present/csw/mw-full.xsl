@@ -109,8 +109,6 @@
                   select="document($apiUrlRelated)"/>
     <xsl:variable name="existingAssociations"
                   select="../mri:associatedResource/*/mri:metadataReference/@uuidref"/>
-<xsl:message><xsl:value-of select="$apiUrlRelated"/> </xsl:message>
-<xsl:message>aa<xsl:copy-of select="$associatedRecords"/> </xsl:message>
     <xsl:for-each select="$associatedRecords/related/*/item">
       <xsl:variable name="uuid" select="id"/>
       <xsl:if test="count($existingAssociations[. = $uuid]) = 0">
