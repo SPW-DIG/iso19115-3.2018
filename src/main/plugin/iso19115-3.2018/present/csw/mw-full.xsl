@@ -5,6 +5,7 @@
   xmlns:gco="http://www.isotc211.org/2005/gco"
   xmlns:gmd="http://www.isotc211.org/2005/gmd"
   xmlns:srv="http://www.isotc211.org/2005/srv"
+  xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0"
   xmlns:gcx="http://standards.iso.org/iso/19115/-3/gcx/1.0"
   xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0"
   xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0"
@@ -12,11 +13,15 @@
   xmlns:mco="http://standards.iso.org/iso/19115/-3/mco/1.0"
   xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0"
   xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:util="java:org.fao.geonet.util.XslUtil"
   exclude-result-prefixes="#all">
 
   <xsl:import href="../../convert/ISO19139/toISO19139.xsl"/>
 
   <xsl:param name="displayInfo"/>
+
+  <xsl:variable name="nodeUrl"
+                select="util:getSettingValue('nodeUrl')"/>
 
   <!-- Replace all 115-3 anchors by CharacterString -->
   <xsl:template match="gcx:Anchor[count(ancestor::mdb:referenceSystemInfo) = 0]"
@@ -57,6 +62,7 @@
       <xsl:apply-templates select="mco:otherConstraints[not(contains(*, 'No limitations to public access'))]" />
     </gmd:MD_LegalConstraints>
   </xsl:template>
+
   <xsl:template match="mri:resourceConstraints/*[mco:useLimitation/*/text() = 'Conditions d''accès et d''utilisation spécifiques' and $isUsingAnchorForConstraints]">
     <gmd:MD_LegalConstraints>
       <!--xsl:apply-templates select="mco:useLimitation|mco:useConstraints"/-->
@@ -77,7 +83,7 @@
           </xsl:when>
           <xsl:when test="$isRestrictedCPUC">
             <gco:CharacterString>ACCÈS : Les conditions générales d'accès s’appliquent (https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGA.pdf).
-              UTILISATION : Les conditions générales d'utilisation s'appliquent (https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGU.pdf) mais sont restreintes par les conditions particulières de type C (https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CPU-TypeC.pdf).</gco:CharacterString>
+              UTILISATION : Les conditions générales d'utilisation s'appliquent (https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGU.pdf) et sont étendues par les conditions particulières de type C (https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CPU-TypeC.pdf).</gco:CharacterString>
           </xsl:when>
           <xsl:otherwise>
             <gco:CharacterString>ACCÈS : Les conditions générales d'accès s’appliquent (https://geoportail.wallonie.be/files/documents/ConditionsSPW/DataSPW-CGA.pdf).
@@ -88,6 +94,42 @@
     </gmd:MD_LegalConstraints>
   </xsl:template>
 
+
+  <xsl:template match="mri:resourceConstraints[following-sibling::*[1]/name(.) != 'mri:resourceConstraints']">
+    <gmd:resourceConstraints>
+      <xsl:apply-templates select="*"/>
+    </gmd:resourceConstraints>
+
+    <!--
+    Add aggregates http://metawal.wallonie.be/geonetwork/srv/api/records/1880/related?type=associated
+    -->
+    <xsl:variable name="apiUrlRelated"
+                  select="concat($nodeUrl, 'api/records/', //mdb:metadataIdentifier/*/mcc:code/*/text(), '/related?type=associated&amp;type=brothersAndSisters')"/>
+    <xsl:variable name="associatedRecords"
+                  select="document($apiUrlRelated)"/>
+    <xsl:variable name="existingAssociations"
+                  select="../mri:associatedResource/*/mri:metadataReference/@uuidref"/>
+    <xsl:for-each select="$associatedRecords/related/*/item">
+      <xsl:variable name="uuid" select="id"/>
+      <xsl:if test="count($existingAssociations[. = $uuid]) = 0">
+        <xsl:comment>Added from <xsl:value-of select="$apiUrlRelated"/> </xsl:comment>
+        <gmd:aggregationInfo>
+          <gmd:MD_AggregateInformation>
+            <gmd:aggregateDataSetIdentifier>
+              <gmd:MD_Identifier>
+                <gmd:code>
+                  <gco:CharacterString><xsl:value-of select="$uuid"/></gco:CharacterString>
+                </gmd:code>
+              </gmd:MD_Identifier>
+            </gmd:aggregateDataSetIdentifier>
+            <gmd:associationType>
+              <gmd:DS_AssociationTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#DS_AssociationTypeCode" codeListValue="crossReference" />
+            </gmd:associationType>
+          </gmd:MD_AggregateInformation>
+        </gmd:aggregationInfo>
+      </xsl:if>
+    </xsl:for-each>
+  </xsl:template>
 
 
   <xsl:template match="/">
