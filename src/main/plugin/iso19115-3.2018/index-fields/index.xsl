@@ -783,7 +783,7 @@
 
 
         <!-- Service information -->
-        <xsl:for-each select="srv:serviceType/gco:LocalName">
+        <xsl:for-each select="srv:serviceType/gco:ScopedName">
           <serviceType>
             <xsl:value-of select="text()"/>
           </serviceType>
