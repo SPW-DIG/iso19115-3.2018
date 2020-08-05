@@ -937,7 +937,7 @@
                 <xsl:for-each select="*/gfc:listedValue">{
                   "label": "<xsl:value-of select="gn-fn-index:json-escape(*/gfc:label/*/text())"/>",
                   "code": "<xsl:value-of select="gn-fn-index:json-escape(*/gfc:code/*/text())"/>",
-                  "definition": "<xsl:value-of select="gn-fn-index:json-escape(*/gfc:definition/*/text())"/>)"}
+                  "definition": "<xsl:value-of select="gn-fn-index:json-escape(*/gfc:definition/*/text())"/>"}
                   <xsl:if test="position() != last()">,</xsl:if>
                 </xsl:for-each>
                 ]
