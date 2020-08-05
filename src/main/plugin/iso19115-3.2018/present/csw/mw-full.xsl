@@ -132,6 +132,54 @@
   </xsl:template>
 
 
+  <xsl:variable name="mwThemes">
+    <item old="(1010) Faune et flore" new="Faune et flore"/>
+    <item old="(1020) Eau" new="Eau"/>
+    <item old="(1030) Sol et sous-sol" new="Sol et sous-sol"/>
+    <item old="(1040) Air" new="Air"/>
+    <item old="(10) Nature et environnement" new="Nature et environnement"/>
+    <item old="(2010) Plans et règlements" new="Plans et règlements"/>
+    <item old="(2020) Risques et contraintes" new="Risques et contraintes"/>
+    <item old="(20) Aménagement du territoire" new="Aménagement du territoire"/>
+    <item old="(3010) Routes" new="Routes"/>
+    <item old="(3020) A pied et à vélo" new="A pied et à vélo"/>
+    <item old="(3030) Voies navigables" new="Voies navigables"/>
+    <item old="(3040) Transports en commun" new="Transports en commun"/>
+    <item old="(30) Mobilité" new="Mobilité"/>
+    <item old="(4010) Tourisme" new="Tourisme"/>
+    <item old="(4020) Loisirs" new="Loisirs"/>
+    <item old="(40) Tourisme et loisirs" new="Tourisme et loisirs"/>
+    <item old="(5010) Données topographiques" new="Données topographiques"/>
+    <item old="(5020) Limites administratives" new="Limites administratives"/>
+    <item old="(5030) Photos et imagerie" new="Photos et imagerie"/>
+    <item old="(5040) Cartes anciennes" new="Cartes anciennes"/>
+    <item old="(50) Données de base" new="Données de base"/>
+    <item old="(6010) Industrie et services" new="Industrie et services"/>
+    <item old="(6020) Agriculture" new="Agriculture"/>
+    <item old="(6030) Logement et habitat" new="Logement et habitat"/>
+    <item old="(6040) Bruit" new="Bruit"/>
+    <item old="(60) Société et activités" new="Société et activités"/>
+  </xsl:variable>
+
+
+  <xsl:template match="mri:descriptiveKeywords/*[mri:thesaurusName/*/cit:identifier/*/mcc:code/*/text() = 'geonetwork.thesaurus.external.theme.Themes_geoportail_wallon_hierarchy']">
+    <gmd:MD_Keywords>
+      <xsl:for-each select="mri:keyword/gco115-3:CharacterString">
+        <gmd:keyword>
+          <gco:CharacterString>
+            <xsl:variable name="keyword"
+                          select="."/>
+            <xsl:value-of select="if ($mwThemes//item[@new = $keyword])
+                                  then $mwThemes//item[@new = $keyword]/@old
+                                  else $keyword"/>
+          </gco:CharacterString>
+        </gmd:keyword>
+      </xsl:for-each>
+      <xsl:apply-templates select="mri:type|mri:thesaurusName"/>
+    </gmd:MD_Keywords>
+  </xsl:template>
+
+
   <xsl:template match="/">
     <xsl:for-each select="/*">
       <xsl:variable name="info" select="gn:info"/>
