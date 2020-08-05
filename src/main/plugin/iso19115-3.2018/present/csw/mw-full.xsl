@@ -12,6 +12,8 @@
   xmlns:srv115-3="http://standards.iso.org/iso/19115/-3/srv/2.1"
   xmlns:mco="http://standards.iso.org/iso/19115/-3/mco/1.0"
   xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0"
+  xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0"
+  xmlns:srv2="http://standards.iso.org/iso/19115/-3/srv/2.1"
   xmlns:xlink="http://www.w3.org/1999/xlink"
   xmlns:util="java:org.fao.geonet.util.XslUtil"
   exclude-result-prefixes="#all">
@@ -62,6 +64,110 @@
       <xsl:apply-templates select="mco:otherConstraints[not(contains(*, 'No limitations to public access'))]" />
     </gmd:MD_LegalConstraints>
   </xsl:template>
+
+
+  <xsl:template match="mdb:identificationInfo">
+    <gmd:identificationInfo>
+      <xsl:apply-templates select="@*"/>
+      <xsl:for-each select="./*">
+        <xsl:variable name="nameSpacePrefix">
+          <xsl:call-template name="getNamespacePrefix"/>
+        </xsl:variable>
+
+        <xsl:variable name="isService"
+                      select="local-name(.) = 'SV_ServiceIdentification'"/>
+
+        <xsl:element name="{concat($nameSpacePrefix,':',local-name(.))}">
+          <xsl:apply-templates select="@*"/>
+          <xsl:apply-templates select="mri:citation"/>
+          <xsl:call-template name="writeCharacterStringElement">
+            <xsl:with-param name="elementName" select="'gmd:abstract'"/>
+            <xsl:with-param name="nodeWithStringToWrite" select="mri:abstract"/>
+          </xsl:call-template>
+          <xsl:call-template name="writeCharacterStringElement">
+            <xsl:with-param name="elementName" select="'gmd:purpose'"/>
+            <xsl:with-param name="nodeWithStringToWrite" select="mri:purpose"/>
+          </xsl:call-template>
+          <xsl:call-template name="writeCharacterStringElement">
+            <xsl:with-param name="elementName" select="'gmd:credit'"/>
+            <xsl:with-param name="nodeWithStringToWrite" select="mri:credit"/>
+          </xsl:call-template>
+          <xsl:call-template name="writeCodelistElement">
+            <xsl:with-param name="elementName" select="'gmd:status'"/>
+            <xsl:with-param name="codeListValue" select="mri:status/mcc:MD_ProgressCode/@codeListValue"/>
+            <xsl:with-param name="codeListName" select="'gmd:MD_ProgressCode'"/>
+          </xsl:call-template>
+          <xsl:apply-templates select="mri:pointOfContact"/>
+          <xsl:apply-templates select="mri:resourceMaintenance"/>
+          <xsl:apply-templates select="mri:graphicOverview"/>
+          <xsl:apply-templates select="mri:resourceFormat"/>
+          <xsl:apply-templates select="mri:descriptiveKeywords"/>
+          <xsl:apply-templates select="mri:resourceSpecificUsage"/>
+          <xsl:apply-templates select="mri:resourceConstraints"/>
+          <xsl:apply-templates select="mri:associatedResource"/>
+          <xsl:call-template name="writeCodelistElement">
+            <xsl:with-param name="elementName" select="'gmd:spatialRepresentationType'"/>
+            <xsl:with-param name="codeListName" select="'gmd:MD_SpatialRepresentationTypeCode'"/>
+            <xsl:with-param name="codeListValue" select="mri:spatialRepresentationType/mcc:MD_SpatialRepresentationTypeCode/@codeListValue"/>
+          </xsl:call-template>
+          <xsl:apply-templates select="mri:spatialResolution"/>
+          <!-- This is here to handle early adopters of temporalResolution -->
+          <xsl:apply-templates select="mri:temporalResolution"/>
+          <xsl:apply-templates select="mri:defaultLocale/lan:PT_Locale/lan:language"/>
+          <xsl:apply-templates select="mri:otherLocale/lan:PT_Locale/lan:language"/>
+          <xsl:for-each select="mri:defaultLocale/lan:PT_Locale/lan:characterEncoding|
+                                mri:otherLocale/lan:PT_Locale/lan:characterEncoding">
+            <xsl:call-template name="writeCodelistElement">
+              <xsl:with-param name="elementName" select="'gmd:characterSet'"/>
+              <xsl:with-param name="codeListName" select="'gmd:MD_CharacterSetCode'"/>
+              <xsl:with-param name="codeListValue" select="lan:MD_CharacterSetCode/@codeListValue"/>
+            </xsl:call-template>
+          </xsl:for-each>
+          <xsl:apply-templates select="mri:topicCategory"/>
+
+          <xsl:call-template name="writeCharacterStringElement">
+            <xsl:with-param name="elementName" select="'gmd:environmentDescription'"/>
+            <xsl:with-param name="nodeWithStringToWrite" select="mri:environmentDescription"/>
+          </xsl:call-template>
+
+          <!-- Service Identification Information -->
+          <xsl:if test="srv2:serviceType">
+            <srv:serviceType>
+              <gco:LocalName>
+<!--                <xsl:apply-templates select="srv2:serviceType/gco2:ScopedName/@codeSpace"/>-->
+                <xsl:value-of select="srv2:serviceType/gco115-3:ScopedName"/>
+              </gco:LocalName>
+            </srv:serviceType>
+          </xsl:if>
+
+          <xsl:call-template name="writeCharacterStringElement">
+            <xsl:with-param name="elementName" select="'srv:serviceTypeVersion'"/>
+            <xsl:with-param name="nodeWithStringToWrite" select="srv2:serviceTypeVersion"/>
+          </xsl:call-template>
+
+          <xsl:apply-templates select="mri:extent | srv:extent"/>
+          <xsl:call-template name="writeCharacterStringElement">
+            <xsl:with-param name="elementName" select="'gmd:supplementalInformation'"/>
+            <xsl:with-param name="nodeWithStringToWrite" select="mri:supplementalInformation"/>
+          </xsl:call-template>
+          <xsl:call-template name="writeCodelistElement">
+            <xsl:with-param name="elementName" select="'srv:couplingType'"/>
+            <xsl:with-param name="codeListName" select="'srv:SV_CouplingType'"/>
+            <xsl:with-param name="codeListValue" select="srv2:couplingType/srv2:SV_CouplingType/@codeListValue"/>
+          </xsl:call-template>
+          <xsl:apply-templates select="srv2:containsOperations"/>
+
+          <!-- Add mandatory contains operation -->
+          <xsl:if test="$isService and not(srv2:containsOperations)">
+            <srv:containsOperations/>
+          </xsl:if>
+
+          <xsl:apply-templates select="srv2:operatesOn"/>
+        </xsl:element>
+      </xsl:for-each>
+    </gmd:identificationInfo>
+  </xsl:template>
+
 
   <xsl:template match="mri:resourceConstraints/*[mco:useLimitation/*/text() = 'Conditions d''accès et d''utilisation spécifiques' and $isUsingAnchorForConstraints]">
     <gmd:MD_LegalConstraints>
